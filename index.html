@@ -483,6 +483,23 @@ section { padding: 80px 0; }
   grid-row: 1 / 3;
 }
 
+.project-diagram {
+  background: var(--bg-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin-top: auto;
+  min-height: 175px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.project-diagram svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .visual-diagram {
   width: 100%;
   max-width: 280px;
@@ -956,38 +973,37 @@ footer p {
           </div>
           <p class="project-result">Atención automatizada · cliente real en producción</p>
         </div>
-        <div class="project-visual" style="background:var(--bg-dark);display:flex;align-items:center;justify-content:center;padding:1.5rem;border-radius:0 0 8px 8px;margin-top:auto;">
-          <svg viewBox="0 0 220 170" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px;">
-            <!-- User -->
-            <rect x="6" y="8" width="60" height="30" rx="4" fill="rgba(0,80,255,0.12)" stroke="rgba(0,80,255,0.35)" stroke-width="1"/>
-            <text x="36" y="20" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="rgba(255,255,255,0.45)">USUARIO</text>
-            <text x="36" y="32" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(0,80,255,0.8)">WhatsApp msg</text>
-            <!-- Arrow -->
-            <line x1="66" y1="23" x2="88" y2="23" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="3,2"/>
-            <polygon points="86,19 86,27 92,23" fill="rgba(255,255,255,0.15)"/>
-            <!-- n8n webhook -->
-            <rect x="92" y="8" width="60" height="30" rx="4" fill="rgba(0,196,160,0.12)" stroke="rgba(0,196,160,0.4)" stroke-width="1.5"/>
-            <text x="122" y="20" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="rgba(255,255,255,0.45)">n8n</text>
-            <text x="122" y="32" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(0,196,160,0.85)">webhook trigger</text>
-            <!-- Arrow to LLM -->
-            <line x1="122" y1="38" x2="122" y2="58" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="3,2"/>
-            <polygon points="118,56 126,56 122,62" fill="rgba(255,255,255,0.15)"/>
+        <div class="project-diagram">
+          <svg viewBox="0 0 340 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- USUARIO -->
+            <rect x="8" y="16" width="80" height="40" rx="5" fill="rgba(0,80,255,0.13)" stroke="rgba(0,80,255,0.4)" stroke-width="1.2"/>
+            <text x="48" y="33" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.55)" letter-spacing="0.5">USUARIO</text>
+            <text x="48" y="48" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(0,130,255,0.9)">WhatsApp msg</text>
+            <!-- Arrow → n8n -->
+            <line x1="88" y1="36" x2="118" y2="36" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" stroke-dasharray="4,3"/>
+            <polygon points="115,31 115,41 123,36" fill="rgba(255,255,255,0.25)"/>
+            <!-- n8n -->
+            <rect x="123" y="16" width="88" height="40" rx="5" fill="rgba(0,196,160,0.13)" stroke="rgba(0,196,160,0.5)" stroke-width="1.5"/>
+            <text x="167" y="33" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.55)">n8n</text>
+            <text x="167" y="48" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(0,196,160,0.9)">webhook trigger</text>
+            <!-- Arrow ↓ LLM -->
+            <line x1="167" y1="56" x2="167" y2="82" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" stroke-dasharray="4,3"/>
+            <polygon points="162,79 172,79 167,87" fill="rgba(255,255,255,0.22)"/>
             <!-- LLM -->
-            <rect x="72" y="62" width="100" height="30" rx="4" fill="rgba(255,200,0,0.10)" stroke="rgba(255,200,0,0.32)" stroke-width="1"/>
-            <text x="122" y="74" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="rgba(255,255,255,0.45)">LLM (OpenAI / Claude)</text>
-            <text x="122" y="86" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(255,200,0,0.8)">comprensión · derivación</text>
-            <!-- Arrows fork -->
-            <line x1="92" y1="92" x2="56" y2="114" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3,2"/>
-            <line x1="152" y1="92" x2="168" y2="114" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3,2"/>
-            <!-- Supabase log -->
-            <rect x="20" y="114" width="70" height="28" rx="4" fill="rgba(0,196,160,0.08)" stroke="rgba(0,196,160,0.25)" stroke-width="1"/>
-            <text x="55" y="126" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(255,255,255,0.4)">SUPABASE</text>
-            <text x="55" y="137" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5" fill="rgba(0,196,160,0.75)">log interacciones</text>
+            <rect x="97" y="87" width="140" height="40" rx="5" fill="rgba(255,195,0,0.11)" stroke="rgba(255,195,0,0.4)" stroke-width="1.2"/>
+            <text x="167" y="104" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.55)">LLM — OpenAI / Claude</text>
+            <text x="167" y="120" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(255,195,0,0.85)">comprensión · derivación</text>
+            <!-- Fork arrows -->
+            <line x1="127" y1="127" x2="72" y2="148" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="3,3"/>
+            <line x1="207" y1="127" x2="264" y2="148" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="3,3"/>
+            <!-- Supabase -->
+            <rect x="18" y="148" width="108" height="24" rx="4" fill="rgba(0,196,160,0.09)" stroke="rgba(0,196,160,0.3)" stroke-width="1"/>
+            <text x="72" y="158" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(255,255,255,0.4)">SUPABASE</text>
+            <text x="72" y="168" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6.5" fill="rgba(0,196,160,0.8)">log interacciones</text>
             <!-- Reply -->
-            <rect x="130" y="114" width="82" height="28" rx="4" fill="rgba(0,80,255,0.1)" stroke="rgba(0,80,255,0.3)" stroke-width="1"/>
-            <text x="171" y="126" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(255,255,255,0.4)">RESPUESTA AUTO</text>
-            <text x="171" y="137" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5" fill="rgba(0,80,255,0.8)">WhatsApp reply</text>
-            <text x="110" y="162" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5" fill="rgba(255,255,255,0.15)" letter-spacing="0.8">lenguaje natural · 24/7</text>
+            <rect x="214" y="148" width="114" height="24" rx="4" fill="rgba(0,80,255,0.1)" stroke="rgba(0,80,255,0.3)" stroke-width="1"/>
+            <text x="271" y="158" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(255,255,255,0.4)">RESPUESTA AUTO</text>
+            <text x="271" y="168" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6.5" fill="rgba(0,100,255,0.85)">WhatsApp reply</text>
           </svg>
         </div>
       </div>
@@ -1009,35 +1025,36 @@ footer p {
           </div>
           <p class="project-result">Generación automatizada con IA · ciclo semanal</p>
         </div>
-        <div class="project-visual" style="background:var(--bg-dark);display:flex;align-items:center;justify-content:center;padding:1.5rem;border-radius:0 0 8px 8px;margin-top:auto;">
-          <svg viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px;">
-            <!-- Sheets source -->
-            <rect x="10" y="20" width="62" height="30" rx="4" fill="rgba(0,196,160,0.12)" stroke="rgba(0,196,160,0.35)" stroke-width="1"/>
-            <text x="41" y="33" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="rgba(255,255,255,0.45)">G. SHEETS</text>
-            <text x="41" y="44" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(0,196,160,0.8)">dataset input</text>
-            <!-- Arrow -->
-            <line x1="72" y1="35" x2="92" y2="35" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="3,2"/>
-            <polygon points="90,31 90,39 96,35" fill="rgba(255,255,255,0.15)"/>
-            <!-- n8n loop -->
-            <rect x="96" y="10" width="70" height="50" rx="4" fill="rgba(0,80,255,0.12)" stroke="rgba(0,80,255,0.4)" stroke-width="1.5"/>
-            <text x="131" y="28" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6.5" fill="rgba(255,255,255,0.5)">n8n</text>
-            <text x="131" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(0,80,255,0.85)">loop + merge</text>
-            <text x="131" y="52" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5" fill="rgba(0,80,255,0.6)">rate limit mgmt</text>
-            <!-- Arrow to LLM -->
-            <line x1="166" y1="35" x2="184" y2="35" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="3,2"/>
-            <polygon points="182,31 182,39 188,35" fill="rgba(255,255,255,0.15)"/>
-            <!-- LLM -->
-            <rect x="148" y="20" width="62" height="30" rx="4" fill="rgba(255,200,0,0.10)" stroke="rgba(255,200,0,0.32)" stroke-width="1"/>
-            <text x="179" y="33" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="rgba(255,255,255,0.45)">Claude API</text>
-            <text x="179" y="44" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(255,200,0,0.8)">generación</text>
-            <!-- Arrow down back to sheets -->
-            <line x1="131" y1="60" x2="131" y2="84" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="3,2"/>
-            <polygon points="127,82 135,82 131,88" fill="rgba(255,255,255,0.15)"/>
+        <div class="project-diagram">
+          <svg viewBox="0 0 340 165" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- G.Sheets source -->
+            <rect x="8" y="18" width="88" height="40" rx="5" fill="rgba(0,196,160,0.12)" stroke="rgba(0,196,160,0.4)" stroke-width="1.2"/>
+            <text x="52" y="35" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.55)">G. SHEETS</text>
+            <text x="52" y="50" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(0,196,160,0.85)">dataset input</text>
+            <!-- Arrow → -->
+            <line x1="96" y1="38" x2="120" y2="38" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" stroke-dasharray="4,3"/>
+            <polygon points="117,33 117,43 125,38" fill="rgba(255,255,255,0.25)"/>
+            <!-- n8n center -->
+            <rect x="125" y="8" width="100" height="60" rx="5" fill="rgba(0,80,255,0.13)" stroke="rgba(0,80,255,0.45)" stroke-width="1.5"/>
+            <text x="175" y="30" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(255,255,255,0.6)">n8n</text>
+            <text x="175" y="46" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(80,130,255,0.9)">loop · merge</text>
+            <text x="175" y="60" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6.5" fill="rgba(80,130,255,0.65)">rate limit mgmt</text>
+            <!-- Arrow → Claude -->
+            <line x1="225" y1="38" x2="248" y2="38" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" stroke-dasharray="4,3"/>
+            <polygon points="245,33 245,43 253,38" fill="rgba(255,255,255,0.25)"/>
+            <!-- Claude API -->
+            <rect x="253" y="18" width="80" height="40" rx="5" fill="rgba(255,195,0,0.11)" stroke="rgba(255,195,0,0.4)" stroke-width="1.2"/>
+            <text x="293" y="35" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.55)">Claude API</text>
+            <text x="293" y="50" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(255,195,0,0.85)">generación IA</text>
+            <!-- Arrow ↓ from n8n -->
+            <line x1="175" y1="68" x2="175" y2="96" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" stroke-dasharray="4,3"/>
+            <polygon points="170,93 180,93 175,101" fill="rgba(255,255,255,0.22)"/>
             <!-- Sheets output -->
-            <rect x="70" y="88" width="122" height="30" rx="4" fill="rgba(0,196,160,0.08)" stroke="rgba(0,196,160,0.25)" stroke-width="1"/>
-            <text x="131" y="101" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="rgba(255,255,255,0.4)">G. SHEETS — output</text>
-            <text x="131" y="112" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(0,196,160,0.75)">contenido estructurado escrito</text>
-            <text x="110" y="136" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5" fill="rgba(255,255,255,0.15)" letter-spacing="0.8">ciclo semanal · sin intervención</text>
+            <rect x="75" y="101" width="200" height="40" rx="5" fill="rgba(0,196,160,0.09)" stroke="rgba(0,196,160,0.3)" stroke-width="1.2"/>
+            <text x="175" y="118" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.5)">G. SHEETS — output</text>
+            <text x="175" y="133" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(0,196,160,0.8)">contenido estructurado escrito automáticamente</text>
+            <!-- bottom label -->
+            <text x="170" y="158" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6.5" fill="rgba(255,255,255,0.2)" letter-spacing="0.8">ciclo semanal · sin intervención manual</text>
           </svg>
         </div>
       </div>
@@ -1060,34 +1077,33 @@ footer p {
           </div>
           <p class="project-result">3 paneles en uso real · centro de diagnóstico médico</p>
         </div>
-        <div class="project-visual" style="background:var(--bg-dark);display:flex;align-items:center;justify-content:center;padding:1.5rem;border-radius:0 0 8px 8px;margin-top:auto;">
-          <svg viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px;">
-            <!-- Docker -->
-            <rect x="70" y="8" width="80" height="26" rx="4" fill="rgba(0,196,160,0.10)" stroke="rgba(0,196,160,0.3)" stroke-width="1"/>
-            <text x="110" y="18" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(255,255,255,0.4)">DOCKER COMPOSE</text>
-            <text x="110" y="29" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5" fill="rgba(0,196,160,0.7)">Node.js + SQLite</text>
-            <!-- Lines down -->
-            <line x1="55" y1="34" x2="55" y2="58" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3,2"/>
-            <line x1="110" y1="34" x2="110" y2="58" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3,2"/>
-            <line x1="165" y1="34" x2="165" y2="58" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3,2"/>
-            <!-- Horizontal connector -->
-            <line x1="55" y1="34" x2="165" y2="34" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <div class="project-diagram">
+          <svg viewBox="0 0 340 158" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Docker header -->
+            <rect x="70" y="8" width="200" height="34" rx="5" fill="rgba(0,196,160,0.10)" stroke="rgba(0,196,160,0.35)" stroke-width="1.2"/>
+            <text x="170" y="22" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.45)">DOCKER COMPOSE</text>
+            <text x="170" y="36" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(0,196,160,0.75)">Node.js + SQLite · VPS local</text>
+            <!-- Vertical lines down -->
+            <line x1="80" y1="42" x2="80" y2="68" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <line x1="170" y1="42" x2="170" y2="68" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <line x1="260" y1="42" x2="260" y2="68" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <line x1="80" y1="42" x2="260" y2="42" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
             <!-- Panel Recepcion -->
-            <rect x="10" y="58" width="90" height="36" rx="4" fill="rgba(0,80,255,0.12)" stroke="rgba(0,80,255,0.35)" stroke-width="1"/>
-            <text x="55" y="72" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="rgba(255,255,255,0.45)">RECEPCIÓN</text>
-            <text x="55" y="83" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(0,80,255,0.85)">/recepcion</text>
+            <rect x="10" y="68" width="120" height="44" rx="5" fill="rgba(0,80,255,0.13)" stroke="rgba(0,80,255,0.4)" stroke-width="1.2"/>
+            <text x="70" y="86" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" fill="rgba(255,255,255,0.55)">RECEPCIÓN</text>
+            <text x="70" y="101" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(80,130,255,0.9)">/recepcion</text>
             <!-- Panel Sala -->
-            <rect x="65" y="58" width="90" height="36" rx="4" fill="rgba(0,196,160,0.12)" stroke="rgba(0,196,160,0.35)" stroke-width="1"/>
-            <text x="110" y="72" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="rgba(255,255,255,0.45)">SALA ESPERA</text>
-            <text x="110" y="83" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(0,196,160,0.85)">/sala</text>
+            <rect x="110" y="68" width="120" height="44" rx="5" fill="rgba(0,196,160,0.13)" stroke="rgba(0,196,160,0.45)" stroke-width="1.2"/>
+            <text x="170" y="86" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" fill="rgba(255,255,255,0.55)">SALA ESPERA</text>
+            <text x="170" y="101" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(0,196,160,0.9)">/sala</text>
             <!-- Panel Medico -->
-            <rect x="120" y="58" width="90" height="36" rx="4" fill="rgba(255,200,0,0.10)" stroke="rgba(255,200,0,0.3)" stroke-width="1"/>
-            <text x="165" y="72" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="rgba(255,255,255,0.45)">MÉDICO</text>
-            <text x="165" y="83" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(255,200,0,0.8)">/medico</text>
+            <rect x="210" y="68" width="120" height="44" rx="5" fill="rgba(255,195,0,0.10)" stroke="rgba(255,195,0,0.38)" stroke-width="1.2"/>
+            <text x="270" y="86" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8.5" fill="rgba(255,255,255,0.55)">MÉDICO</text>
+            <text x="270" y="101" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(255,195,0,0.85)">/medico</text>
             <!-- WebSocket band -->
-            <rect x="10" y="106" width="200" height="24" rx="4" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-            <text x="110" y="122" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="rgba(255,255,255,0.25)" letter-spacing="0.8">WebSocket · sincronización en tiempo real</text>
-            <text x="110" y="145" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5" fill="rgba(255,255,255,0.15)" letter-spacing="0.8">3 paneles · uso operativo diario</text>
+            <rect x="10" y="124" width="320" height="26" rx="4" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+            <text x="170" y="136" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7.5" fill="rgba(255,255,255,0.3)" letter-spacing="0.5">⚡ WebSocket — sincronización en tiempo real</text>
+            <text x="170" y="148" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6.5" fill="rgba(255,255,255,0.18)">3 paneles interconectados · uso operativo diario</text>
           </svg>
         </div>
       </div>
@@ -1110,36 +1126,38 @@ footer p {
           </div>
           <p class="project-result">Uso diario en gestión operativa · sector público</p>
         </div>
-        <div class="project-visual" style="background:var(--bg-dark);display:flex;align-items:center;justify-content:center;padding:1.5rem;border-radius:0 0 8px 8px;margin-top:auto;">
-          <svg viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:220px;">
-            <!-- SQL source -->
-            <rect x="10" y="20" width="60" height="28" rx="4" fill="rgba(0,80,255,0.12)" stroke="rgba(0,80,255,0.3)" stroke-width="1"/>
-            <text x="40" y="32" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="rgba(255,255,255,0.45)">SQL SERVER</text>
-            <text x="40" y="43" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(0,80,255,0.8)">datos crudos</text>
-            <!-- Arrow -->
-            <line x1="70" y1="34" x2="88" y2="34" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3,2"/>
-            <polygon points="86,30 86,38 92,34" fill="rgba(255,255,255,0.15)"/>
-            <!-- Python ETL -->
-            <rect x="92" y="20" width="60" height="28" rx="4" fill="rgba(0,196,160,0.12)" stroke="rgba(0,196,160,0.35)" stroke-width="1.5"/>
-            <text x="122" y="32" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="rgba(255,255,255,0.45)">PYTHON</text>
-            <text x="122" y="43" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(0,196,160,0.85)">ETL + transform</text>
-            <!-- Arrow -->
-            <line x1="152" y1="34" x2="168" y2="34" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="3,2"/>
-            <polygon points="166,30 166,38 172,34" fill="rgba(255,255,255,0.15)"/>
+        <div class="project-diagram">
+          <svg viewBox="0 0 340 158" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Pipeline top row -->
+            <rect x="10" y="10" width="88" height="36" rx="5" fill="rgba(0,80,255,0.12)" stroke="rgba(0,80,255,0.35)" stroke-width="1.2"/>
+            <text x="54" y="25" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.5)">SQL SERVER</text>
+            <text x="54" y="39" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(0,100,255,0.85)">datos crudos</text>
+            <!-- Arrow → -->
+            <line x1="98" y1="28" x2="120" y2="28" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" stroke-dasharray="4,3"/>
+            <polygon points="117,23 117,33 125,28" fill="rgba(255,255,255,0.25)"/>
+            <!-- Python -->
+            <rect x="125" y="10" width="90" height="36" rx="5" fill="rgba(0,196,160,0.12)" stroke="rgba(0,196,160,0.4)" stroke-width="1.5"/>
+            <text x="170" y="25" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.5)">PYTHON</text>
+            <text x="170" y="39" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(0,196,160,0.85)">ETL · transform</text>
+            <!-- Arrow → -->
+            <line x1="215" y1="28" x2="236" y2="28" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" stroke-dasharray="4,3"/>
+            <polygon points="233,23 233,33 241,28" fill="rgba(255,255,255,0.25)"/>
             <!-- Power BI -->
-            <rect x="150" y="20" width="60" height="28" rx="4" fill="rgba(255,200,0,0.10)" stroke="rgba(255,200,0,0.3)" stroke-width="1"/>
-            <text x="180" y="32" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6" fill="rgba(255,255,255,0.45)">POWER BI</text>
-            <text x="180" y="43" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5.5" fill="rgba(255,200,0,0.8)">dashboard</text>
-            <!-- KPI bars visual -->
-            <rect x="30" y="70" width="14" height="50" rx="2" fill="rgba(0,80,255,0.25)" stroke="rgba(0,80,255,0.4)" stroke-width="1"/>
-            <rect x="52" y="82" width="14" height="38" rx="2" fill="rgba(0,80,255,0.18)" stroke="rgba(0,80,255,0.3)" stroke-width="1"/>
-            <rect x="74" y="60" width="14" height="60" rx="2" fill="rgba(0,196,160,0.25)" stroke="rgba(0,196,160,0.4)" stroke-width="1"/>
-            <rect x="96" y="88" width="14" height="32" rx="2" fill="rgba(0,196,160,0.15)" stroke="rgba(0,196,160,0.3)" stroke-width="1"/>
-            <rect x="118" y="74" width="14" height="46" rx="2" fill="rgba(255,200,0,0.2)" stroke="rgba(255,200,0,0.35)" stroke-width="1"/>
-            <rect x="140" y="65" width="14" height="55" rx="2" fill="rgba(255,200,0,0.25)" stroke="rgba(255,200,0,0.4)" stroke-width="1"/>
-            <rect x="162" y="78" width="14" height="42" rx="2" fill="rgba(0,80,255,0.15)" stroke="rgba(0,80,255,0.25)" stroke-width="1"/>
-            <line x1="20" y1="120" x2="200" y2="120" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-            <text x="110" y="138" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="5" fill="rgba(255,255,255,0.18)" letter-spacing="0.8">KPIs · inventario · compras · equipos</text>
+            <rect x="241" y="10" width="90" height="36" rx="5" fill="rgba(255,195,0,0.10)" stroke="rgba(255,195,0,0.38)" stroke-width="1.2"/>
+            <text x="286" y="25" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="rgba(255,255,255,0.5)">POWER BI</text>
+            <text x="286" y="39" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="7" fill="rgba(255,195,0,0.8)">dashboard</text>
+            <!-- Bar chart -->
+            <line x1="20" y1="140" x2="320" y2="140" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <rect x="30"  y="80"  width="24" height="60" rx="2" fill="rgba(0,80,255,0.35)"  stroke="rgba(0,80,255,0.5)"  stroke-width="1"/>
+            <rect x="62"  y="95"  width="24" height="45" rx="2" fill="rgba(0,80,255,0.22)"  stroke="rgba(0,80,255,0.35)" stroke-width="1"/>
+            <rect x="94"  y="68"  width="24" height="72" rx="2" fill="rgba(0,196,160,0.35)" stroke="rgba(0,196,160,0.5)" stroke-width="1"/>
+            <rect x="126" y="100" width="24" height="40" rx="2" fill="rgba(0,196,160,0.22)" stroke="rgba(0,196,160,0.35)" stroke-width="1"/>
+            <rect x="158" y="85"  width="24" height="55" rx="2" fill="rgba(255,195,0,0.28)" stroke="rgba(255,195,0,0.45)" stroke-width="1"/>
+            <rect x="190" y="72"  width="24" height="68" rx="2" fill="rgba(255,195,0,0.35)" stroke="rgba(255,195,0,0.5)" stroke-width="1"/>
+            <rect x="222" y="90"  width="24" height="50" rx="2" fill="rgba(0,80,255,0.22)"  stroke="rgba(0,80,255,0.35)" stroke-width="1"/>
+            <rect x="254" y="78"  width="24" height="62" rx="2" fill="rgba(0,196,160,0.28)" stroke="rgba(0,196,160,0.4)" stroke-width="1"/>
+            <rect x="286" y="88"  width="24" height="52" rx="2" fill="rgba(255,195,0,0.22)" stroke="rgba(255,195,0,0.38)" stroke-width="1"/>
+            <text x="170" y="155" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="6.5" fill="rgba(255,255,255,0.2)" letter-spacing="0.8">KPIs · inventario · compras · equipos · uso diario</text>
           </svg>
         </div>
       </div>
