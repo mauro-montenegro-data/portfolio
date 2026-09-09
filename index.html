@@ -11,22 +11,22 @@
   <style>
     :root{--ivory:#f2efe8;--paper:#f8f6f1;--graphite:#202426;--ink:#22272a;--muted:#6d7478;--line:#d9d4c9;--cobalt:#1949a3;--cobalt2:#2f62d6;--max:1120px}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--ivory);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;line-height:1.65}a{color:inherit}.wrap{width:min(var(--max),calc(100% - 48px));margin:auto}
-    nav{position:sticky;top:0;z-index:30;background:rgba(242,239,232,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(32,36,38,.08)}.nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{text-decoration:none;font-weight:700;letter-spacing:-.02em}.brand span{color:var(--cobalt)}.links{display:flex;gap:22px}.links a{text-decoration:none;font-size:.82rem;font-weight:600;color:var(--muted)}
+    nav{position:sticky;top:0;z-index:30;background:rgba(242,239,232,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(32,36,38,.08)}.nav{height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{text-decoration:none;font-weight:700;letter-spacing:-.02em}.links{display:flex;gap:22px}.links a{text-decoration:none;font-size:.82rem;font-weight:600;color:var(--muted)}
     .hero{position:relative;overflow:hidden;background:var(--graphite);color:var(--ivory);padding:100px 0 76px}.hero:after{content:"";position:absolute;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle,rgba(47,98,214,.3),rgba(47,98,214,0) 68%);right:-220px;top:-250px}.hero .wrap{position:relative;z-index:1}.eyebrow,.kicker,.tiny{font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:.2em;font-size:.7rem}.eyebrow{color:#aebee5}.hero h1,.section-title,.case-title,.bigline{font-family:"Fraunces",Georgia,serif;font-weight:300;letter-spacing:-.04em}.hero h1{font-size:clamp(3.1rem,7vw,6.2rem);line-height:.92;max-width:980px;margin:18px 0 28px}.hero .lead{max-width:760px;color:rgba(242,239,232,.72);font-size:1.13rem}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:11px 16px;text-decoration:none;font-size:.88rem;font-weight:700;border:1px solid rgba(242,239,232,.22)}.btn.primary{background:var(--cobalt);border-color:var(--cobalt);color:#fff}.hero-foot{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;border-top:1px solid rgba(242,239,232,.13)}.hero-foot div{padding:20px 24px 0 0}.hero-foot b{display:block;font-size:.82rem}.hero-foot span{font-size:.75rem;color:rgba(242,239,232,.5)}
-    section{padding:72px 0;border-bottom:1px solid var(--line)}.section-head{display:grid;grid-template-columns:180px 1fr;gap:46px;margin-bottom:36px}.kicker{color:var(--cobalt);padding-top:10px}.section-title{font-size:clamp(2.2rem,4.6vw,4.4rem);line-height:1.02;margin:0;max-width:850px}.intro{max-width:780px;color:#474f53;font-size:1.02rem}.intro p{margin:0 0 18px}.profile-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:42px}.principles{border-left:3px solid var(--cobalt);padding-left:28px}.principles .tiny{color:var(--muted);margin-bottom:12px}.principles ul{list-style:none;padding:0;margin:0}.principles li{padding:11px 0;border-bottom:1px solid var(--line);color:#42494d}.principles li:last-child{border-bottom:0}
-    .cases{display:grid;gap:0}.case{display:grid;grid-template-columns:170px 1fr 180px;gap:34px;padding:44px 0;border-top:1px solid var(--line);align-items:start}.case:first-child{border-top:0}.case-number{font-family:"DM Mono",monospace;font-size:.72rem;color:var(--cobalt);letter-spacing:.12em}.case-title{font-size:clamp(2rem,3.4vw,3.3rem);line-height:1.03;margin:0 0 14px}.case p{margin:0 0 15px;color:#4a5256;max-width:720px}.case .problem{color:var(--ink);font-weight:600}.case-meta{font-family:"DM Mono",monospace;font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;line-height:1.8}.case-link{display:inline-block;margin-top:8px;color:var(--cobalt);font-weight:700;text-decoration:none}.case-link:hover{text-decoration:underline}.case.featured{padding:52px 0}.case.featured .case-title{font-size:clamp(2.4rem,4.6vw,4.5rem)}.case-note{margin-top:18px;padding:16px 0;border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
-    .capabilities{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.capability{padding-top:18px;border-top:2px solid var(--cobalt)}.capability h3{margin:0 0 10px;font-size:.95rem}.capability p{margin:0;color:var(--muted);font-size:.88rem}.stackline{margin-top:42px;padding-top:24px;border-top:1px solid var(--line);font-family:"DM Mono",monospace;color:var(--muted);font-size:.73rem;line-height:2}
-    .journey{display:grid;grid-template-columns:1fr 1fr;gap:50px}.bigline{font-size:clamp(2rem,4vw,3.8rem);line-height:1.06;margin:0}.timeline{border-left:1px solid var(--line);padding-left:28px}.job{padding:0 0 28px}.job:last-child{padding-bottom:0}.job time{font-family:"DM Mono",monospace;font-size:.7rem;color:var(--muted)}.job h3{margin:5px 0 3px;font-size:1rem}.job p{margin:0;color:var(--muted);font-size:.88rem}.education{margin-top:24px;padding-top:22px;border-top:1px solid var(--line)}.education .tiny{color:var(--cobalt);margin-bottom:8px}.education h3{margin:0 0 5px;font-size:1rem}.education p{margin:0;color:var(--muted);font-size:.88rem}
+    section{padding:68px 0;border-bottom:1px solid var(--line)}.section-head{display:grid;grid-template-columns:180px 1fr;gap:46px;margin-bottom:34px}.kicker{color:var(--cobalt);padding-top:10px}.section-title{font-size:clamp(2.2rem,4.6vw,4.4rem);line-height:1.02;margin:0;max-width:850px}.intro{max-width:780px;color:#474f53;font-size:1.02rem}.intro p{margin:0 0 18px}.profile-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:42px}.principles{border-left:3px solid var(--cobalt);padding-left:28px}.principles .tiny{color:var(--muted);margin-bottom:12px}.principles ul{list-style:none;padding:0;margin:0}.principles li{padding:12px 0;border-bottom:1px solid var(--line);color:#42494d}.principles li:last-child{border-bottom:0}
+    .cases{display:grid;gap:0}.case{display:grid;grid-template-columns:170px 1fr 180px;gap:34px;padding:40px 0;border-top:1px solid var(--line);align-items:start}.case:first-child{border-top:0}.case-number{font-family:"DM Mono",monospace;font-size:.72rem;color:var(--cobalt);letter-spacing:.12em}.case-title{font-size:clamp(2rem,3.4vw,3.3rem);line-height:1.03;margin:0 0 14px}.case p{margin:0 0 15px;color:#4a5256;max-width:720px}.case .problem{color:var(--ink);font-weight:600}.case-meta{font-family:"DM Mono",monospace;font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;line-height:1.8}.case-link{display:inline-block;margin-top:8px;color:var(--cobalt);font-weight:700;text-decoration:none}.case-link:hover{text-decoration:underline}.case.featured{padding:46px 0}.case.featured .case-title{font-size:clamp(2.4rem,4.6vw,4.5rem)}.case-note{margin-top:18px;padding:16px 0;border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
+    .capabilities{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.capability{padding-top:18px;border-top:2px solid var(--cobalt)}.capability h3{margin:0 0 10px;font-size:.95rem}.capability p{margin:0;color:var(--muted);font-size:.88rem}.stackline{margin-top:36px;padding-top:22px;border-top:1px solid var(--line);font-family:"DM Mono",monospace;color:var(--muted);font-size:.73rem;line-height:2}
+    .journey{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px}.bigline{font-size:clamp(1.9rem,3.4vw,3.2rem);line-height:1.08;margin:0}.timeline{border-left:1px solid var(--line);padding-left:28px}.job{padding:0 0 24px}.job:last-child{padding-bottom:0}.job time{font-family:"DM Mono",monospace;font-size:.7rem;color:var(--muted)}.job h3{margin:5px 0 3px;font-size:1rem}.job p{margin:0;color:var(--muted);font-size:.88rem}.education{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}.education .tiny{color:var(--cobalt);margin-bottom:8px}.education h3{margin:0 0 5px;font-size:1rem}.education p{margin:0;color:var(--muted);font-size:.88rem}
     .contact{background:var(--graphite);color:var(--ivory);border-bottom:0}.contact .kicker{color:#aebee5}.contact .section-title{max-width:900px}.contact p{max-width:720px;color:rgba(242,239,232,.65)}.contact-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.contact-links a{padding:10px 14px;border:1px solid rgba(242,239,232,.2);border-radius:999px;text-decoration:none;font-weight:600;font-size:.85rem}
     footer{background:#131617;color:rgba(242,239,232,.4);padding:20px 0;font-size:.78rem}
     @media(max-width:850px){.links{display:none}.hero-foot{grid-template-columns:1fr 1fr}.section-head,.profile-grid,.journey{grid-template-columns:1fr;gap:20px}.case{grid-template-columns:70px 1fr}.case-meta{grid-column:2}.capabilities{grid-template-columns:1fr 1fr}}
-    @media(max-width:540px){.wrap{width:calc(100% - 28px)}.hero{padding:78px 0 58px}.hero h1{font-size:clamp(2.8rem,14vw,4.2rem)}.hero-foot,.capabilities{grid-template-columns:1fr}.case{grid-template-columns:1fr;gap:10px}.case-meta{grid-column:auto}.case-number{margin-bottom:4px}section{padding:56px 0}}
+    @media(max-width:540px){.wrap{width:calc(100% - 28px)}.hero{padding:78px 0 58px}.hero h1{font-size:clamp(2.8rem,14vw,4.2rem)}.hero-foot,.capabilities{grid-template-columns:1fr}.case{grid-template-columns:1fr;gap:10px}.case-meta{grid-column:auto}.case-number{margin-bottom:4px}section{padding:54px 0}}
   </style>
 </head>
 <body>
   <nav>
     <div class="wrap nav">
-      <a class="brand" href="#inicio">Mauro<span>.</span>Montenegro</a>
+      <a class="brand" href="#inicio">Mauro Montenegro</a>
       <div class="links"><a href="#perfil">Perfil</a><a href="#casos">Casos</a><a href="#capacidades">Capacidades</a><a href="#trayectoria">Trayectoria</a><a href="#contacto">Contacto</a></div>
     </div>
   </nav>
@@ -34,8 +34,8 @@
   <header class="hero" id="inicio">
     <div class="wrap">
       <div class="eyebrow">Operations · Data · Automation</div>
-      <h1>Primero entiendo la operación. Después construyo.</h1>
-      <p class="lead">Trabajo sobre problemas donde se cruzan procesos, datos y herramientas internas: información dispersa, tareas manuales, poca trazabilidad y decisiones que dependen demasiado del conocimiento de una persona.</p>
+      <h1>Primero entiendo la operación, después construyo.</h1>
+      <p class="lead">Trabajo donde se cruzan procesos, datos y herramientas internas: información dispersa, tareas manuales, poca trazabilidad y decisiones que dependen demasiado del conocimiento de una persona.</p>
       <div class="actions">
         <a class="btn primary" href="#casos">Ver casos ↓</a>
         <a class="btn" href="https://github.com/mauro-montenegro-data" target="_blank" rel="noreferrer">GitHub ↗</a>
@@ -57,17 +57,14 @@
         <div class="profile-grid">
           <div class="intro">
             <p>Soy <strong>Técnico Superior en Ciencia de Datos</strong> y actualmente trabajo como <strong>Jefe Administrativo en Espacios Verdes</strong>. Antes pasé por producción industrial, emergencias médicas, gastronomía y gestión de depósito.</p>
-            <p>Con el tiempo empecé a encontrar el mismo patrón en contextos distintos: procesos que funcionan, pero dependen de planillas, memoria, seguimiento informal o datos difíciles de reconstruir. Ahí fue donde datos, automatización y desarrollo dejaron de ser un interés separado y se convirtieron en mi forma de resolver problemas.</p>
-            <p>También desarrollo proyectos a través de <strong>Polpo</strong>, con foco en datos, automatización e implementación de herramientas operativas. Busco profundizar mi carrera en roles donde se crucen <strong>Operations, Data, Analytics, Process Improvement y Automation</strong>.</p>
+            <p>Con el tiempo, <strong>los datos, la automatización y el desarrollo</strong> se convirtieron en mi forma de ordenar procesos, reducir tareas manuales y construir herramientas que puedan usarse y revisarse. También desarrollo proyectos a través de <strong>Polpo</strong>.</p>
           </div>
           <aside class="principles">
             <div class="tiny">Cómo suelo trabajar</div>
             <ul>
               <li>Entender el proceso antes que la herramienta.</li>
               <li>Registrar antes de automatizar.</li>
-              <li>Diseñar para usuarios no técnicos.</li>
               <li>Dejar trazabilidad y posibilidad de revisión.</li>
-              <li>Adaptar la tecnología a restricciones reales.</li>
             </ul>
           </aside>
         </div>
@@ -83,8 +80,8 @@
             <div>
               <h3 class="case-title">Control Operativo de Ventas y Cobranzas</h3>
               <p class="problem">Quería saber qué pasaba con los datos antes de analizarlos.</p>
-              <p>Pipeline reproducible sobre cinco fuentes que valida estructura, normaliza, separa rechazados, aplica correcciones seguras y deja evidencia de cada ejecución. La demo usa un dataset 100% sintético.</p>
-              <div class="case-note">Corrida de referencia: 1.974 filas recibidas → 1.868 procesadas · 106 rechazadas · 1.622 observaciones.</div>
+              <p>Pipeline reproducible sobre cinco fuentes que valida estructura, normaliza, separa rechazados y deja evidencia de cada ejecución. La demo usa un dataset 100% sintético.</p>
+              <div class="case-note">1.974 filas recibidas → 1.868 procesadas · 106 rechazadas · 1.622 observaciones.</div>
               <a class="case-link" href="cases/ventas-cobranzas.html">Ver caso completo →</a>
               &nbsp;&nbsp;<a class="case-link" href="https://polpo-control-demo.vercel.app/" target="_blank" rel="noreferrer">Abrir demo ↗</a>
             </div>
@@ -107,7 +104,7 @@
             <div>
               <h3 class="case-title">Sistema de Turnos — Ecografías</h3>
               <p class="problem">El software tenía que llegar hasta la sala de espera.</p>
-              <p>Sistema local en operación que coordina recepción, profesional y sala mediante estados persistidos y WebSockets, con importación desde Excel y documentación de instalación y recuperación.</p>
+              <p>Sistema local en operación que coordina recepción, profesional y sala mediante estados persistidos y WebSockets, con importación desde Excel.</p>
               <a class="case-link" href="cases/ecografias-turnos.html">Ver caso completo →</a>
             </div>
             <div class="case-meta">Node.js<br>Express<br>SQLite<br>WebSockets<br>Local-first</div>
@@ -118,7 +115,7 @@
             <div>
               <h3 class="case-title">Gestión de Depósito</h3>
               <p class="problem">No podía empezar de cero, porque la base operativa ya existía.</p>
-              <p>Aplicación sobre PostgreSQL legacy para productos, stock, entradas, salidas y series, evolucionada con usuarios, roles, sesiones server-side, auditoría y control de movimientos.</p>
+              <p>Aplicación sobre PostgreSQL legacy para productos, stock, entradas, salidas y series, con usuarios, roles, auditoría y control de movimientos.</p>
               <a class="case-link" href="cases/deposito.html">Ver caso completo →</a>
             </div>
             <div class="case-meta">Node.js<br>TypeScript<br>PostgreSQL<br>React<br>Security</div>
@@ -129,7 +126,7 @@
             <div>
               <h3 class="case-title">Project Control</h3>
               <p class="problem">El estado de un proyecto técnico suele quedar repartido entre código, documentación y decisiones.</p>
-              <p>Experimento en desarrollo para derivar una vista de trabajo desde evidencia explícita, separando observaciones, evidence, claims y modelos sin inventar precisión.</p>
+              <p>Experimento en desarrollo para derivar una vista de trabajo desde evidencia explícita y reconciliar fuentes sin inventar precisión.</p>
               <a class="case-link" href="cases/project-control.html">Ver caso →</a>
             </div>
             <div class="case-meta">Architecture<br>Evidence<br>Git/GitHub<br>Modeling<br>In progress</div>
@@ -145,7 +142,7 @@
           <article class="capability"><h3>Datos y análisis</h3><p>Python, Pandas, SQL, PostgreSQL, calidad de datos, validaciones y reportes reproducibles.</p></article>
           <article class="capability"><h3>Automatización e integración</h3><p>n8n, APIs REST, webhooks, WhatsApp Cloud API e integración con fuentes que no siempre tienen API.</p></article>
           <article class="capability"><h3>Herramientas internas</h3><p>Node.js, TypeScript, React, SQLite/PostgreSQL y aplicaciones diseñadas alrededor del flujo operativo.</p></article>
-          <article class="capability"><h3>Implementación</h3><p>Relevamiento, documentación, pruebas, instalación, recuperación, trazabilidad y evolución iterativa.</p></article>
+          <article class="capability"><h3>Implementación</h3><p>Relevamiento, documentación, pruebas, instalación, recuperación y evolución iterativa.</p></article>
         </div>
         <div class="stackline">Python · Pandas · SQL · PostgreSQL · Node.js · TypeScript · JavaScript · React · n8n · REST APIs · Webhooks · Git/GitHub · Playwright · Excel / Google Sheets</div>
       </div>
@@ -153,19 +150,18 @@
 
     <section id="trayectoria">
       <div class="wrap">
-        <div class="section-head"><div class="kicker">04 · Trayectoria</div><h2 class="section-title">No fue un camino lineal hacia tecnología.</h2></div>
+        <div class="section-head"><div class="kicker">04 · Trayectoria</div><h2 class="section-title">De la operación a los datos.</h2></div>
         <div class="journey">
-          <p class="bigline">Primero aprendí a trabajar y gestionar operaciones. Después encontré en los datos y el desarrollo una forma de mejorarlas.</p>
+          <p class="bigline">Primero trabajé y gestioné operaciones. Después encontré en los datos y el desarrollo una forma de mejorarlas.</p>
           <div>
             <div class="timeline">
-              <div class="job"><time>2025 — actualidad</time><h3>Jefe Administrativo · Espacios Verdes</h3><p>Gestión administrativa y operativa, procesos, documentación y herramientas internas.</p></div>
-              <div class="job"><time>2022 — 2025</time><h3>Supervisor de Depósito · Espacios Verdes</h3><p>Stock, movimientos, operación cotidiana y evolución de herramientas para el área.</p></div>
-              <div class="job"><time>Experiencia previa</time><h3>Producción · emergencias · gastronomía · administración</h3><p>Contextos distintos que me dieron experiencia directa con personas, procesos, tiempos y restricciones reales.</p></div>
+              <div class="job"><time>2025 — actualidad</time><h3>Jefe Administrativo · Espacios Verdes</h3><p>Gestión operativa y administrativa, procesos y herramientas internas.</p></div>
+              <div class="job"><time>2022 — 2025</time><h3>Supervisor de Depósito · Espacios Verdes</h3><p>Stock, movimientos y operación cotidiana.</p></div>
+              <div class="job"><time>Experiencia previa</time><h3>Producción · emergencias · gastronomía · administración</h3></div>
             </div>
             <div class="education">
               <div class="tiny">Formación</div>
               <h3>Técnico Superior en Ciencia de Datos · 2023 — 2025</h3>
-              <p>Formación técnica que formalizó una transición que ya había empezado desde los problemas operativos.</p>
             </div>
           </div>
         </div>
@@ -175,7 +171,7 @@
     <section class="contact" id="contacto">
       <div class="wrap">
         <div class="section-head"><div class="kicker">05 · Contacto</div><h2 class="section-title">Busco seguir creciendo donde operación y tecnología se encuentren.</h2></div>
-        <p>Estoy orientando mi carrera hacia Data, Analytics, Operations, Process Improvement y Automation, con especial interés en equipos donde el trabajo técnico tenga contacto real con la operación.</p>
+        <p>Me interesan roles de Data, Analytics, Operations, Process Improvement y Automation con contacto real con la operación.</p>
         <div class="contact-links">
           <a href="mailto:maumontenegrom@gmail.com">Email</a>
           <a href="https://linkedin.com/in/mauro-montenegro-data" target="_blank" rel="noreferrer">LinkedIn ↗</a>
