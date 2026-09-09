@@ -61,6 +61,14 @@ Cada case page explica ahora explícitamente qué parte del trabajo correspondi�
 
 Existe `SCREENSHOT_PLAN.md` con prioridades, nombres de archivos, viewport y gate de privacidad. La siguiente mejora de alto impacto ya no es agregar más texto: es incorporar evidencia visual seleccionada.
 
+### Ronda 5 — recruiter pass
+
+Se simuló la lectura de 20–60 segundos desde GitHub/portfolio y se ajustó la portada para que la primera señal sea `Operations + Data`, no el cargo público aislado. Se reordenaron los casos destacados para contar: datos → procesos → producción real → legacy/seguridad → producto técnico.
+
+Resultado completo en `RECRUITER_PASS.md`.
+
+**Gate de narrativa: APROBADO.** No seguir agregando copy salvo que aparezca una vacante concreta que requiera adaptar lenguaje o prioridades.
+
 ## Producción visual pendiente
 
 ### Ventas y Cobranzas
