@@ -10,7 +10,7 @@
 <body>
   <nav>
     <div class="wrap nav">
-      <a class="brand" href="../index.html">Mauro<span>.</span>Montenegro</a>
+      <a class="brand" href="../index.html">Mauro Montenegro</a>
       <a class="back" href="../index.html#casos">← Volver a casos</a>
     </div>
   </nav>
@@ -19,27 +19,26 @@
     <div class="wrap">
       <div class="eyebrow">Caso personal · Data quality · Demo sintética</div>
       <h1>Quería saber qué pasaba con los datos antes de analizarlos.</h1>
-      <p class="lead">Armé este caso para trabajar una situación bastante común: información repartida en varios archivos, errores mezclados con datos válidos y poca certeza sobre qué conviene corregir, separar o revisar.</p>
+      <p class="lead">Cinco archivos, errores mezclados con datos válidos y una pregunta central: qué conviene corregir, separar o revisar.</p>
       <div class="hero-meta"><span>Python</span><span>Pandas</span><span>Pytest</span><span>Semilla 42</span><span>Datos 100% sintéticos</span></div>
       <div class="hero-actions">
         <a class="btn primary" href="https://polpo-control-demo.vercel.app/" target="_blank" rel="noreferrer">Abrir demo ↗</a>
-        <a class="btn" href="#historia">Ver cómo lo armé ↓</a>
+        <a class="btn" href="#historia">Ver el caso ↓</a>
       </div>
     </div>
   </header>
 
   <main class="wrap">
     <section class="chapter" id="historia">
-      <div class="kicker">01 · De dónde salió</div>
+      <div class="kicker">01 · Punto de partida</div>
       <div>
-        <h2 class="section-title">No quería hacer otra demo que empezara con los datos ya prolijos.</h2>
+        <h2 class="section-title">No quería una demo que empezara con los datos ya prolijos.</h2>
         <div class="copy">
-          <p>Elegí ventas y cobranzas porque permite juntar problemas que aparecen seguido en operaciones reales: archivos que llegan por separado, relaciones entre entidades, fechas inconsistentes, duplicados, pagos que no cierran y registros que no deberían entrar al dataset final.</p>
-          <p>Lo que más me interesaba no era solamente “limpiar” esos archivos. Quería que, después de una corrida, pudiera reconstruirse <strong>qué entró bien, qué se corrigió, qué quedó afuera y por qué</strong>.</p>
+          <p>Armé un escenario de ventas y cobranzas con archivos separados, relaciones entre entidades, fechas inconsistentes, duplicados y pagos que no cierran. El objetivo era poder reconstruir <strong>qué entró bien, qué se corrigió, qué quedó afuera y por qué</strong>.</p>
         </div>
         <figure class="shot">
           <img src="../assets/cases/ventas-cobranzas/01-overview.png" alt="Vista general de la demo de control operativo de ventas y cobranzas">
-          <figcaption>La vista general de la demo, construida sobre un dataset sintético reproducible.</figcaption>
+          <figcaption>Vista general de la demo sobre un dataset sintético reproducible.</figcaption>
         </figure>
       </div>
     </section>
@@ -54,20 +53,16 @@
           <div class="metric"><b>106</b><span>separadas para revisión</span></div>
           <div class="metric"><b>1.622</b><span>observaciones registradas</span></div>
         </div>
-        <div class="copy">
-          <p>La corrida de referencia se genera siempre con la misma semilla. Dentro de esas 1.622 observaciones aparecen 1.363 autocorrecciones, 149 advertencias y 0 errores bloqueantes.</p>
-          <p>No ajusté esos números para el portfolio: son el resultado de ejecutar el pipeline sobre el dataset demo tal como está documentado y testeado.</p>
-        </div>
+        <div class="copy"><p>La corrida usa siempre la misma semilla y produce estos resultados de forma reproducible.</p></div>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">03 · Qué construí</div>
+      <div class="kicker">03 · Pipeline</div>
       <div>
         <p class="statement">Cinco fuentes entran juntas. Después cada registro tiene que poder contar su propia historia.</p>
         <div class="copy">
-          <p>El flujo detecta los archivos, valida su estructura, guarda una copia raw, normaliza, aplica reglas entre entidades, separa los rechazados y deja reportes de calidad y evidencia de la ejecución.</p>
-          <p>Preferí mantener esas etapas explícitas antes que esconder todo dentro de una única transformación difícil de revisar.</p>
+          <p>El flujo valida estructura, conserva una copia raw, normaliza, aplica reglas, separa rechazados y genera reportes de calidad y evidencia de ejecución.</p>
         </div>
         <figure class="shot dark">
           <img src="../assets/cases/ventas-cobranzas/05-pipeline.png" alt="Diagrama del pipeline de datos de ventas y cobranzas">
@@ -77,19 +72,19 @@
     </section>
 
     <section class="chapter">
-      <div class="kicker">04 · Cuando algo falla</div>
+      <div class="kicker">04 · Calidad de datos</div>
       <div>
         <h2 class="section-title">No todos los errores merecen la misma respuesta.</h2>
         <div class="copy">
-          <p>Una fila con un problema no debería tirar abajo toda la corrida si el resto de los datos puede procesarse de forma segura. Por eso separé cuatro situaciones distintas: error bloqueante, fila rechazada, advertencia y autocorrección determinística.</p>
+          <p>Separé error bloqueante, fila rechazada, advertencia y autocorrección determinística para que un problema puntual no tire abajo una corrida completa cuando el resto sigue siendo utilizable.</p>
         </div>
         <figure class="shot">
           <img src="../assets/cases/ventas-cobranzas/03-rejected-rows.png" alt="Registros rechazados con el motivo de rechazo en la demo">
-          <figcaption>Los registros rechazados quedan apartados con el motivo visible; no desaparecen silenciosamente.</figcaption>
+          <figcaption>Los registros rechazados quedan apartados con el motivo visible.</figcaption>
         </figure>
         <div class="decision-list">
           <div class="decision"><div class="num">01</div><div><h3>Corregir sólo cuando la regla es segura</h3><p>Las autocorrecciones son determinísticas y quedan registradas.</p></div></div>
-          <div class="decision"><div class="num">02</div><div><h3>Separar antes que ocultar</h3><p>Las filas que no pueden aceptarse se conservan aparte junto con su motivo.</p></div></div>
+          <div class="decision"><div class="num">02</div><div><h3>Separar antes que ocultar</h3><p>Las filas que no pueden aceptarse se conservan junto con su motivo.</p></div></div>
           <div class="decision"><div class="num">03</div><div><h3>No frenar todo por cualquier problema</h3><p>Las advertencias permiten continuar cuando el dato sigue siendo utilizable.</p></div></div>
         </div>
       </div>
@@ -99,19 +94,12 @@
       <div class="kicker">05 · Trazabilidad</div>
       <div>
         <h2 class="section-title">La salida final no es solamente un CSV limpio.</h2>
-        <div class="split">
-          <div class="copy">
-            <p>Cada ejecución conserva procesados, rechazados, errores, reporte de calidad, manifiesto y log. La intención es que una corrección pueda revisarse después sin depender de recordar qué hizo el script.</p>
-            <p>Para las capturas públicas evité el manifiesto crudo porque incluía una ruta local absoluta del entorno de ejecución. La evidencia visible usa únicamente información segura de la corrida demo.</p>
-          </div>
-          <aside class="note">
-            <div class="tiny">Decisión de diseño</div>
-            <p>Cuando una salida técnica contiene información del entorno local que no aporta al caso, prefiero no publicarla antes que “anonimizarla” a último momento y perder reproducibilidad.</p>
-          </aside>
+        <div class="copy">
+          <p>Cada ejecución conserva procesados, rechazados, errores, reporte de calidad, manifiesto y log para que una corrección pueda revisarse después.</p>
         </div>
         <figure class="shot">
           <img src="../assets/cases/ventas-cobranzas/06-execution-evidence.png" alt="Evidencia de una ejecución del pipeline con reporte de calidad y registros rechazados">
-          <figcaption>Una parte de la evidencia que queda después de ejecutar el pipeline.</figcaption>
+          <figcaption>Parte de la evidencia que queda después de ejecutar el pipeline.</figcaption>
         </figure>
       </div>
     </section>
@@ -121,12 +109,11 @@
       <div>
         <h2 class="section-title">Lo armé de punta a punta como ejercicio de operación + datos.</h2>
         <div class="copy">
-          <p>Definí el caso, el modelo de datos, las reglas de validación y la taxonomía de calidad. Preparé el generador sintético, implementé el pipeline y sus tests, y documenté cómo reproducir una corrida completa.</p>
-          <p>El código del caso principal se mantiene privado. La demo pública usa únicamente datos ficticios y está pensada para que pueda recorrerse el resultado sin exponer información de terceros.</p>
+          <p>Definí el caso, el modelo de datos, las reglas de validación, el generador sintético, el pipeline y sus tests. La demo pública usa únicamente datos ficticios.</p>
         </div>
         <div class="closing">
           <div class="tiny">Demo pública</div>
-          <p>Si querés ver el resultado funcionando, la demo reproduce visualmente la misma corrida documentada en este caso.</p>
+          <p>La demo reproduce visualmente la misma corrida documentada en este caso.</p>
           <a class="btn primary" href="https://polpo-control-demo.vercel.app/" target="_blank" rel="noreferrer">Abrir demo ↗</a>
         </div>
       </div>

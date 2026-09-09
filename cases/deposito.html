@@ -10,7 +10,7 @@
 <body>
   <nav>
     <div class="wrap nav">
-      <a class="brand" href="../index.html">Mauro<span>.</span>Montenegro</a>
+      <a class="brand" href="../index.html">Mauro Montenegro</a>
       <a class="back" href="../index.html#casos">← Volver a casos</a>
     </div>
   </nav>
@@ -18,8 +18,8 @@
   <header class="hero">
     <div class="wrap">
       <div class="eyebrow">Caso real · Sistema legacy · Operación interna</div>
-      <h1>No podía empezar de cero. Y eso terminó definiendo casi todo.</h1>
-      <p class="lead">El depósito ya tenía una base PostgreSQL en uso. La tarea no era reemplazarla con una arquitectura “más linda”, sino sumar una aplicación útil sin romper datos, relaciones ni hábitos operativos existentes.</p>
+      <h1>No podía empezar de cero. La base operativa ya existía.</h1>
+      <p class="lead">El depósito ya trabajaba sobre PostgreSQL. La aplicación tenía que sumar control sin romper datos, relaciones ni hábitos existentes.</p>
       <div class="hero-meta"><span>Node.js</span><span>TypeScript</span><span>PostgreSQL</span><span>React</span><span>Auditoría</span></div>
       <div class="hero-actions"><a class="btn" href="#historia">Ver el caso ↓</a></div>
     </div>
@@ -27,27 +27,25 @@
 
   <main class="wrap">
     <section class="chapter" id="historia">
-      <div class="kicker">01 · La restricción</div>
+      <div class="kicker">01 · Restricción</div>
       <div>
         <h2 class="section-title">Los datos ya tenían una historia antes de que existiera esta aplicación.</h2>
         <div class="copy">
-          <p>Productos, stock, entradas, salidas, series y cargos ya vivían en tablas legacy. Había que consultar y operar sobre esa estructura sin forzar una migración total ni asumir que podía cambiarse todo de una vez.</p>
-          <p>Elegí una evolución incremental: conservar las tablas operativas y agregar de forma separada las capacidades nuevas que la aplicación necesitaba —usuarios, sesiones, auditoría y control de movimientos.</p>
+          <p>Productos, stock, entradas, salidas, series y cargos ya vivían en tablas legacy. En lugar de reemplazarlas, construí una capa de aplicación sobre esa estructura y agregué capacidades nuevas de forma incremental.</p>
         </div>
         <figure class="shot">
           <img src="../assets/cases/deposito/01-dashboard.png" alt="Dashboard demo del sistema de gestión de depósito">
-          <figcaption>Vista general con un dataset ficticio preparado exclusivamente para el portfolio.</figcaption>
+          <figcaption>Vista general con un dataset ficticio preparado para el portfolio.</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">02 · Hacer visible el stock</div>
+      <div class="kicker">02 · Stock</div>
       <div>
-        <p class="statement">Antes de automatizar movimientos, necesitaba que consultar el estado del depósito fuera simple.</p>
+        <p class="statement">Antes de automatizar movimientos, consultar el estado del depósito tenía que ser simple.</p>
         <div class="copy">
-          <p>La aplicación organiza productos y existencias en una interfaz pensada para uso diario. A partir de esa base fui incorporando altas, entradas, salidas y búsquedas por número de serie.</p>
-          <p>Las reglas importantes no quedan en la interfaz: el backend vuelve a validar cada operación antes de modificar datos.</p>
+          <p>La aplicación organiza productos y existencias y permite operar altas, entradas, salidas y búsquedas por número de serie. El backend vuelve a validar cada operación antes de modificar datos.</p>
         </div>
         <figure class="shot">
           <img src="../assets/cases/deposito/02-productos-stock.png" alt="Productos y stock ficticios en el sistema de depósito">
@@ -57,37 +55,33 @@
     </section>
 
     <section class="chapter">
-      <div class="kicker">03 · Movimientos que importan</div>
+      <div class="kicker">03 · Movimientos</div>
       <div>
         <h2 class="section-title">Una salida no es sólo restar una unidad.</h2>
-        <div class="split">
-          <div class="copy">
-            <p>Cuando hay bienes serializados, la operación necesita vincular una unidad concreta, validar su disponibilidad y dejar registrado quién hizo el movimiento. El sistema incorpora búsqueda exacta por serie y reglas específicas para este flujo.</p>
-            <p>También contempla correcciones y anulaciones con permisos diferenciados. La intención es preservar la historia, no borrar físicamente aquello que después puede necesitar explicación.</p>
-          </div>
-          <aside class="note">
-            <div class="tiny">Principio</div>
-            <p>En operaciones sensibles, “editar” no debería significar perder la versión anterior sin dejar rastro.</p>
-          </aside>
+        <div class="copy">
+          <p>Para bienes serializados, el sistema vincula una unidad concreta, valida disponibilidad y registra el movimiento. Las correcciones y anulaciones preservan la historia en lugar de borrar físicamente lo anterior.</p>
         </div>
+        <aside class="note">
+          <div class="tiny">Principio</div>
+          <p>En operaciones sensibles, editar no debería significar perder la versión anterior sin dejar rastro.</p>
+        </aside>
         <figure class="shot dark">
           <img src="../assets/cases/deposito/04-salida-serie.png" alt="Salida serializada demo del sistema de depósito">
-          <figcaption>Flujo de salida serializada construido con productos, agentes y números de serie ficticios.</figcaption>
+          <figcaption>Flujo de salida serializada con productos, agentes y números de serie ficticios.</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">04 · Permisos reales</div>
+      <div class="kicker">04 · Permisos</div>
       <div>
         <h2 class="section-title">No todas las personas deberían poder hacer lo mismo.</h2>
         <div class="copy">
-          <p>El sistema diferencia cuatro responsabilidades: ADMIN, RESPONSABLE, OPERADOR y CONSULTA. La interfaz adapta lo que muestra, pero la autorización vuelve a comprobarse en el servidor en cada request protegido.</p>
-          <p>Las sesiones son opacas y se almacenan del lado servidor. La cookie es HttpOnly y las contraseñas se derivan con scrypt y salt aleatorio.</p>
+          <p>El sistema diferencia ADMIN, RESPONSABLE, OPERADOR y CONSULTA. La interfaz adapta lo que muestra y el servidor vuelve a comprobar la autorización en cada request protegido.</p>
         </div>
         <figure class="shot">
           <img src="../assets/cases/deposito/05-usuarios-roles.png" alt="Usuarios y roles ficticios en el sistema de depósito">
-          <figcaption>Usuarios demo creados para representar las cuatro responsabilidades sin exponer identidades reales.</figcaption>
+          <figcaption>Usuarios demo para representar las cuatro responsabilidades.</figcaption>
         </figure>
       </div>
     </section>
@@ -97,39 +91,26 @@
       <div>
         <h2 class="section-title">Quería poder responder quién hizo qué sin depender de la memoria.</h2>
         <div class="copy">
-          <p>La aplicación registra eventos de autenticación, gestión de usuarios y movimientos. En correcciones y anulaciones mantiene estado y versión del movimiento, y asocia los cambios al evento correspondiente.</p>
-          <p>Ese criterio de trazabilidad terminó siendo más importante que varias funcionalidades visibles: permite revisar una acción sensible después de que ocurrió.</p>
+          <p>La aplicación registra eventos de autenticación, usuarios y movimientos, y conserva estado y versión cuando hay correcciones o anulaciones.</p>
         </div>
         <figure class="shot">
           <img src="../assets/cases/deposito/06-auditoria.png" alt="Auditoría demo del sistema de depósito">
-          <figcaption>Eventos de auditoría generados por operaciones ficticias realizadas a través de la API real.</figcaption>
+          <figcaption>Eventos de auditoría generados por operaciones ficticias a través de la API real.</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">06 · Decisiones</div>
-      <div>
-        <h2 class="section-title">La modernización fue una capa, no una demolición.</h2>
-        <div class="decision-list">
-          <div class="decision"><div class="num">01</div><div><h3>Convivir con legacy</h3><p>Los repositorios traducen la estructura existente al dominio de la aplicación sin ocultar que esas tablas siguen siendo la base operativa.</p></div></div>
-          <div class="decision"><div class="num">02</div><div><h3>Permisos server-side</h3><p>La UI nunca es la fuente de verdad para autorizar una acción sensible.</p></div></div>
-          <div class="decision"><div class="num">03</div><div><h3>LAN sólo de forma deliberada</h3><p>La aplicación conserva localhost como comportamiento por defecto y requiere configuración explícita para exponerse en red.</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="chapter">
-      <div class="kicker">07 · Mi parte</div>
+      <div class="kicker">06 · Mi parte</div>
       <div>
         <h2 class="section-title">Diseñé alrededor de las restricciones que ya estaban ahí.</h2>
         <div class="copy">
-          <p>Analicé el proceso del depósito, definí arquitectura, permisos y reglas, implementé backend y frontend, integré la aplicación con la base legacy y diseñé las migraciones propias de seguridad y auditoría.</p>
-          <p>Para documentar el caso público levanté un Postgres descartable aislado y cargué datos 100% ficticios mediante la API de la aplicación. La suite ejecutada para esta preparación quedó en <strong>2.072 tests verdes en 137 archivos</strong>, además de build backend y frontend sin errores.</p>
+          <p>Analicé el proceso, definí arquitectura, permisos y reglas, implementé backend y frontend e integré la aplicación con la base legacy.</p>
+          <p>Para documentar el caso levanté un Postgres descartable con datos 100% ficticios. La suite ejecutada quedó en <strong>2.072 tests verdes en 137 archivos</strong>, además de build backend y frontend sin errores.</p>
         </div>
         <div class="closing">
-          <div class="tiny">Lo que resume este caso</div>
-          <p>Modernizar una operación también significa saber qué no conviene reemplazar todavía y construir controles alrededor de esa decisión.</p>
+          <div class="tiny">Resultado</div>
+          <p>Modernizar una operación también puede significar conservar lo que ya funciona y agregar controles alrededor.</p>
           <a class="btn primary" href="../index.html#casos">Volver a los casos</a>
         </div>
       </div>
