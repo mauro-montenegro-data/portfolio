@@ -12,13 +12,13 @@ Narrativa central:
 
 ## Casos principales
 
-| Caso | Capacidad principal | Código | Case page | Guía visual |
-|---|---|---|---|---|
-| Ventas y Cobranzas | Data quality + pipeline reproducible | Privado / demo pública | ✅ | ✅ |
-| Depósito v2 | Operaciones + legacy + seguridad | Privado | ✅ | ✅ |
-| Gestión Espacios Públicos | Relevamiento + modelado + herramienta interna | Privado | ✅ | ✅ existente |
-| Turnos Ecografías | Software en operación real + local-first | Privado | ✅ | ✅ |
-| Project Control | Modelado técnico + evidence/reconciliation | Privado | ✅ | ✅ |
+| Caso | Capacidad principal | Código | Case page | Guía visual | Mi rol explícito |
+|---|---|---|---|---|---|
+| Ventas y Cobranzas | Data quality + pipeline reproducible | Privado / demo pública | ✅ | ✅ | ✅ |
+| Depósito v2 | Operaciones + legacy + seguridad | Privado | ✅ | ✅ | ✅ |
+| Gestión Espacios Públicos | Relevamiento + modelado + herramienta interna | Privado | ✅ | ✅ existente | ✅ |
+| Turnos Ecografías | Software en operación real + local-first | Privado | ✅ | ✅ | ✅ |
+| Project Control | Modelado técnico + evidence/reconciliation | Privado | ✅ | ✅ | ✅ |
 
 ## Proyectos públicos secundarios
 
@@ -28,13 +28,38 @@ Estado: README actualizado. Caso pequeño y revisable `SQL → KPI → n8n → T
 ### ai-content-generation-pipeline
 Estado: README actualizado para eliminar claims excesivos y separar claramente demo de producción.
 
+### claudeskills
+Estado: público, pero no destacado. Puede quedar visible como evidencia secundaria de disciplina de trabajo con agentes y tooling; no debe competir con los casos principales.
+
 ## Higiene pública
 
 - `portfolio`: portfolio vigente.
-- `portfolio-mauro`: versión legacy; ahora redirige al portfolio vigente.
+- `portfolio-mauro`: versión legacy; redirige al portfolio vigente y tiene README que lo aclara.
 - `mauro-montenegro-data`: README de perfil actualizado y conectado a los case studies.
-- `household-finance-dashboard-demo`: **repo público vacío**. Revisar si conviene eliminarlo o hacerlo privado antes de una candidatura importante.
-- `claudeskills`: revisar si aporta al perfil objetivo; no forma parte de los proyectos destacados.
+- `household-finance-dashboard-demo`: **repo público vacío**. Conviene eliminarlo o hacerlo privado antes de una candidatura importante.
+- `claudeskills`: mantener fuera de destacados salvo que una búsqueda valore explícitamente developer tooling/agent workflows.
+
+## Rondas completadas
+
+### Ronda 1 — narrativa
+
+- se reemplazó el foco anterior en Growth/Martech por Operations & Data;
+- se alineó CV, README de perfil y portfolio;
+- se seleccionaron cinco casos con capacidades distintas.
+
+### Ronda 2 — profundidad de casos
+
+- cada caso principal tiene página independiente;
+- los repos de origen tienen case study o documentación equivalente;
+- se corrigieron claims temporales/obsoletos detectados en Project Control y Turnos.
+
+### Ronda 3 — autoría y responsabilidad
+
+Cada case page explica ahora explícitamente qué parte del trabajo correspondió a Mauro: relevamiento, modelado, decisiones, implementación, tests/documentación según el proyecto. Esto reduce la ambigüedad típica de portfolios que muestran sistemas sin aclarar el rol del candidato.
+
+### Ronda 4 — preparación visual
+
+Existe `SCREENSHOT_PLAN.md` con prioridades, nombres de archivos, viewport y gate de privacidad. La siguiente mejora de alto impacto ya no es agregar más texto: es incorporar evidencia visual seleccionada.
 
 ## Producción visual pendiente
 
@@ -91,3 +116,5 @@ Ningún screenshot o ejemplo de operación real debe incluir:
 ## Próximo gate
 
 Antes de sumar más texto al portfolio, producir evidencia visual para **Ventas/Cobranzas, Depósito, Espacios Públicos y Turnos**. El sitio ya tiene estructura suficiente; la mayor mejora marginal ahora proviene de mostrar los sistemas y resultados.
+
+Primera ejecución recomendada: `control_op_ventas_cobranzas`, porque ya trabaja con datos sintéticos y tiene una demo pública. Es el mejor repo para probar el flujo de screenshots automatizados antes de tocar sistemas basados en operaciones reales.
