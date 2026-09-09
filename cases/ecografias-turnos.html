@@ -1,12 +1,134 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Caso de portfolio: Sistema de Turnos — Ecografías del Sur."><title>Sistema de Turnos — Mauro Montenegro</title><link rel="stylesheet" href="../assets/case.css"></head><body><nav><div class="wrap nav"><a class="brand" href="../index.html">Mauro<span>.</span>Montenegro</a><a class="back" href="../index.html#casos">← Volver a casos</a></div></nav><header class="hero"><div class="wrap"><div class="eyebrow">Caso · Cliente real · Sistema en operación</div><h1>Sistema de Turnos — Ecografías del Sur</h1><p>Recepción, consultorio y sala de espera coordinados en una red local, con actualización en tiempo real y sin depender de Internet para la operación diaria.</p><div class="meta"><span class="pill">Node.js</span><span class="pill">Express</span><span class="pill">SQLite</span><span class="pill">WebSockets</span><span class="pill">Local-first</span></div></div></header><main class="wrap"><section class="section"><div class="label">Problema</div><div><h2>Tres puntos de una misma operación debían compartir estado.</h2><p>Recepción registra la llegada, el profesional llama desde su consultorio y la sala de espera debe mostrar el llamado de forma inmediata y comprensible. La solución además debía adaptarse a información proveniente de un sistema externo y funcionar con infraestructura local.</p></div></section><section class="section"><div class="label">Solución</div><div><h2>Un sistema local con tres interfaces coordinadas.</h2><pre>Helios / Excel
-      ↓
-  Importación
-      ↓
-    SQLite
-      ↑
-Express + lógica de cola
-      ↓
-  WebSocket
- ┌────┼─────────┐
- ↓    ↓         ↓
-Recepción  Consultorio  Sala</pre><p>La sala muestra el llamado y reproduce señal sonora + voz sintetizada. Las pantallas se actualizan en tiempo real y la persistencia queda local.</p></div></section><section class="section"><div class="label">Decisiones</div><div><h2>La restricción operativa definió la arquitectura.</h2><ul><li><strong>Local-first:</strong> la operación diaria no depende de servicios cloud.</li><li><strong>WebSockets:</strong> sincronización inmediata entre interfaces.</li><li><strong>SQLite:</strong> persistencia simple para una operación acotada.</li><li><strong>Excel como integración:</strong> adaptación pragmática a una fuente existente sin API.</li><li><strong>Node portable:</strong> instalación Windows con baja fricción operativa.</li></ul></div></section><section class="section"><div class="label">Producción</div><div><h2>El proyecto incluye operación y recuperación, no sólo código.</h2><p>El repositorio documenta instalación, checklist, backup/restauración, operación diaria y releases. También conserva material histórico marcado como obsoleto para reducir errores de mantenimiento.</p><div class="callout"><strong>Valor del caso</strong>Mostrar que una solución técnica llega hasta el entorno donde las personas efectivamente trabajan.</div></div></section><section class="section"><div class="label">Mi rol</div><div><h2>Del flujo de atención a la instalación real.</h2><p>Relevé el funcionamiento entre recepción, profesionales y sala, diseñé el modelo de estados y la arquitectura local, implementé backend e interfaces, adapté la importación desde Helios y preparé instalación, documentación operativa, backup y evolución del sistema.</p></div></section><section class="section"><div class="label">Qué demuestra</div><div><h2>Software llevado a una operación real.</h2><ul><li>Relevamiento de un flujo cotidiano.</li><li>Diseño para usuarios no técnicos.</li><li>Integración con fuentes sin API.</li><li>Tiempo real entre múltiples pantallas.</li><li>Decisiones condicionadas por infraestructura.</li><li>Instalación, soporte y documentación operativa.</li></ul><div class="links"><a class="btn" href="../index.html#casos">Volver al portfolio</a></div></div></section></main><footer><div class="wrap">Mauro Montenegro · Operations & Data · 2026</div></footer></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Caso de portfolio: Sistema de Turnos — Ecografías del Sur.">
+  <title>Sistema de Turnos — Mauro Montenegro</title>
+  <link rel="stylesheet" href="../assets/case-ventas-v2.css">
+</head>
+<body>
+  <nav>
+    <div class="wrap nav">
+      <a class="brand" href="../index.html">Mauro<span>.</span>Montenegro</a>
+      <a class="back" href="../index.html#casos">← Volver a casos</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Cliente real · Sistema en operación · Local-first</div>
+      <h1>El software tenía que llegar hasta la sala de espera.</h1>
+      <p class="lead">Recepción registra una llegada, el profesional llama desde otro punto y una pantalla debe reaccionar de inmediato. Diseñé el sistema alrededor de esa secuencia real, con persistencia local y sin depender de Internet para atender.</p>
+      <div class="hero-meta"><span>Node.js</span><span>Express</span><span>SQLite</span><span>WebSockets</span><span>Windows</span></div>
+      <div class="hero-actions"><a class="btn" href="#historia">Ver el flujo ↓</a></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="chapter" id="historia">
+      <div class="kicker">01 · El momento visible</div>
+      <div>
+        <h2 class="section-title">Para el paciente, todo el sistema se resume en un llamado claro.</h2>
+        <div class="copy">
+          <p>La sala es la parte más simple de usar y, al mismo tiempo, la más visible. Cuando un profesional llama a una persona, la pantalla debe mostrarlo enseguida y acompañarlo con señal sonora y voz sintetizada.</p>
+          <p>Detrás de ese momento hay una cola, estados persistidos y varias interfaces que tienen que compartir la misma versión de la operación.</p>
+        </div>
+        <figure class="shot">
+          <img src="../assets/cases/ecografias-turnos/01-sala-llamado.png" alt="Pantalla de sala demo mostrando un llamado de paciente ficticio">
+          <figcaption>Captura preparada con pacientes y datos completamente ficticios.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">02 · Tres puntos, un estado</div>
+      <div>
+        <p class="statement">Recepción, consultorio y sala no son tres aplicaciones distintas: son tres vistas del mismo turno.</p>
+        <div class="copy">
+          <p>Recepción registra la presencia y administra el flujo. El profesional ve su cola y realiza el llamado. La sala recibe ese cambio en tiempo real. WebSocket mantiene las interfaces sincronizadas y SQLite conserva el estado local.</p>
+        </div>
+        <figure class="shot dark">
+          <img src="../assets/cases/ecografias-turnos/04-flujo-tres-pantallas.png" alt="Composición demo con recepción, panel profesional y sala de espera">
+          <figcaption>Las tres interfaces del flujo, todas usando el mismo escenario ficticio.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">03 · Recepción</div>
+      <div>
+        <h2 class="section-title">La operación necesitaba ser rápida antes que sofisticada.</h2>
+        <div class="copy">
+          <p>La interfaz está pensada para registrar llegadas, mover pacientes entre estados y resolver excepciones sin obligar a la recepción a entender la arquitectura del sistema.</p>
+          <p>El modelo contempla el recorrido operativo completo —pendiente, presente, llamado, en consultorio y finalizado— además de situaciones como ausente o volver a cola.</p>
+        </div>
+        <figure class="shot">
+          <img src="../assets/cases/ecografias-turnos/02-recepcion.png" alt="Panel de recepción demo del sistema de turnos">
+          <figcaption>Panel de recepción con turnos ficticios distribuidos en distintos estados.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">04 · Integrarse con lo que ya existe</div>
+      <div>
+        <h2 class="section-title">No había una API que esperar. Había un archivo que ya formaba parte del trabajo.</h2>
+        <div class="split">
+          <div class="copy">
+            <p>Los turnos provienen de Helios mediante exportaciones Excel. En lugar de condicionar el proyecto a una integración ideal, adapté el sistema a esa fuente real: preview, validación e importación antes de llevar los registros a la operación diaria.</p>
+            <p>Para documentar el caso público generé archivos `.xls` ficticios y los hice pasar por el mismo pipeline de importación que utiliza la aplicación.</p>
+          </div>
+          <aside class="note">
+            <div class="tiny">Decisión pragmática</div>
+            <p>Una integración útil no siempre empieza con una API. A veces empieza respetando el formato que la operación ya puede producir de forma confiable.</p>
+          </aside>
+        </div>
+        <figure class="shot">
+          <img src="../assets/cases/ecografias-turnos/05-importacion-demo.png" alt="Modal de importación Helios con archivo ficticio de portfolio">
+          <figcaption>Preview de una importación demo generada desde cero para esta documentación.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">05 · La arquitectura siguió a la restricción</div>
+      <div>
+        <h2 class="section-title">Local-first no fue una preferencia estética.</h2>
+        <div class="copy">
+          <p>La atención no debía quedar atada a Internet. Por eso la solución corre dentro de la clínica, usa SQLite para una operación acotada y mantiene las pantallas conectadas en la red local.</p>
+          <p>También preparé instalación Windows con Node portable, backup, restauración, checklist y documentación de operación diaria. El proyecto tenía que poder mantenerse después del desarrollo.</p>
+        </div>
+        <figure class="shot dark">
+          <img src="../assets/cases/ecografias-turnos/06-arquitectura-local-first.png" alt="Diagrama de arquitectura local-first del sistema de turnos">
+          <figcaption>Helios/Excel → importación → SQLite y lógica Express → WebSockets → recepción, profesional y sala.</figcaption>
+        </figure>
+        <div class="decision-list">
+          <div class="decision"><div class="num">01</div><div><h3>Persistencia local</h3><p>SQLite reduce infraestructura para un volumen y una topología acotados.</p></div></div>
+          <div class="decision"><div class="num">02</div><div><h3>Tiempo real</h3><p>WebSockets permiten que un cambio operativo aparezca inmediatamente en las otras pantallas.</p></div></div>
+          <div class="decision"><div class="num">03</div><div><h3>Instalación pensada como parte del producto</h3><p>El repositorio documenta instalación, backup, restauración y evolución, no sólo el código de la interfaz.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">06 · Mi parte</div>
+      <div>
+        <h2 class="section-title">Desde el flujo de atención hasta la máquina donde corre.</h2>
+        <div class="copy">
+          <p>Relevé cómo se coordinaban recepción, profesionales y sala; diseñé los estados y la arquitectura; implementé backend e interfaces; adapté la importación desde Helios y preparé la instalación local y su documentación operativa.</p>
+          <p>Este caso me interesa especialmente porque obliga a pensar más allá de “que funcione en mi PC”: el sistema tiene que ser entendible, recuperable y suficientemente simple para convivir con una jornada de atención real.</p>
+          <p>Las capturas públicas fueron generadas con fixtures ficticios; no contienen pacientes, turnos, teléfonos, documentos ni información sensible reales.</p>
+        </div>
+        <div class="closing">
+          <div class="tiny">Resultado</div>
+          <p>Una herramienta que conecta tres puntos físicos de la operación y sigue funcionando dentro de la red local aunque Internet no esté disponible.</p>
+          <a class="btn primary" href="../index.html#casos">Volver a los casos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">Mauro Montenegro · Operations & Data · 2026</div></footer>
+</body>
+</html>
