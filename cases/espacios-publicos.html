@@ -1,9 +1,127 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Caso de portfolio: Gestión de Espacios Públicos."><title>Gestión de Espacios Públicos — Mauro Montenegro</title><link rel="stylesheet" href="../assets/case.css"></head><body><nav><div class="wrap nav"><a class="brand" href="../index.html">Mauro<span>.</span>Montenegro</a><a class="back" href="../index.html#casos">← Volver a casos</a></div></nav><header class="hero"><div class="wrap"><div class="eyebrow">Caso · Process Analysis · Código privado</div><h1>Gestión de Espacios Públicos</h1><p>Una herramienta interna nacida de un problema operativo concreto: información repartida entre planillas, papel, llamados y seguimiento informal.</p><div class="meta"><span class="pill">Process Analysis</span><span class="pill">TypeScript</span><span class="pill">PostgreSQL</span><span class="pill">React</span><span class="pill">Data Modeling</span></div></div></header><main class="wrap"><section class="section"><div class="label">Contexto</div><div><h2>El trabajo existía, pero no su trazabilidad.</h2><p>El área gestiona espacios públicos, pedidos de mantenimiento, intervenciones, agentes y cuadrillas, expedientes, trámites y forestación. Gran parte del seguimiento dependía de registros separados y conocimiento informal.</p><ul><li>Pedidos que vivían en distintos canales.</li><li>Dificultad para reconstruir estado e historial.</li><li>Datos de forestación heredados desde planillas.</li><li>Reportes que requerían trabajo manual.</li><li>Usuarios administrativos y operativos con necesidades diferentes.</li></ul></div></section><section class="section"><div class="label">Solución</div><div><h2>Modelar el dominio antes de automatizarlo.</h2><p>La aplicación centraliza espacios, pedidos, intervenciones, cuadrillas, expedientes, trámites administrativos y reclamos de arbolado. El objetivo no es reemplazar todos los sistemas municipales, sino estructurar el flujo cotidiano del área.</p><pre>Espacio público
-   ↓
-Pedido de mantenimiento
-   ↓
-Asignación / estado
-   ↓
-Intervención
-   ↓
-Historial y datos para gestión</pre></div></section><section class="section"><div class="label">Arquitectura</div><div><h2>Full-stack modular, orientado al dominio.</h2><p>Backend Express + TypeScript organizado por módulos y capas `controller → service → repository`, validación Zod y acceso directo a PostgreSQL con `pg`. Frontend React + Vite + TypeScript organizado por feature.</p><p>El dominio utiliza términos en español para evitar una capa innecesaria de traducción entre la operación y el código.</p></div></section><section class="section"><div class="label">UX</div><div><h2>Una herramienta para personal no técnico.</h2><ul><li>Estados escritos con palabras completas.</li><li>Filtros explícitos y persistentes.</li><li>Formularios en modal para flujos repetitivos.</li><li>Exportación CSV para convivir con planillas cuando hace falta.</li><li>Roles y módulos diferenciados según función.</li></ul><div class="callout"><strong>Criterio</strong>Un sistema interno que requiere demasiada capacitación crea una nueva fricción en lugar de resolver la anterior.</div></div></section><section class="section"><div class="label">Mi rol</div><div><h2>Relevamiento, modelado e implementación full-stack.</h2><p>Relevé procesos del área, traduje necesidades operativas y administrativas a módulos, definí modelo de datos, contrato API y arquitectura, implementé backend/frontend e importación de datos heredados y documenté decisiones técnicas y funcionales.</p></div></section><section class="section"><div class="label">Qué demuestra</div><div><h2>Del relevamiento operativo al modelo de datos.</h2><ul><li>Análisis de procesos antes de escribir código.</li><li>Transformación de necesidades administrativas y operativas en módulos.</li><li>Diseño de datos, estados e historial.</li><li>Arquitectura full-stack mantenible.</li><li>Integración de datos heredados.</li><li>Decisiones técnicas y funcionales documentadas.</li></ul><div class="links"><a class="btn" href="../index.html#casos">Volver al portfolio</a></div></div></section></main><footer><div class="wrap">Mauro Montenegro · Operations & Data · 2026</div></footer></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Caso de portfolio: Gestión de Espacios Públicos.">
+  <title>Gestión de Espacios Públicos — Mauro Montenegro</title>
+  <link rel="stylesheet" href="../assets/case-ventas-v2.css">
+</head>
+<body>
+  <nav>
+    <div class="wrap nav">
+      <a class="brand" href="../index.html">Mauro<span>.</span>Montenegro</a>
+      <a class="back" href="../index.html#casos">← Volver a casos</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Caso real · Process analysis · MVP funcional</div>
+      <h1>Antes de pensar en pantallas, tuve que entender cómo se movía el trabajo.</h1>
+      <p class="lead">Este proyecto nació dentro de una operación con plazas, pedidos, cuadrillas y trámites que se seguían entre planillas, papel y conversaciones. Mi primer problema no era programar: era transformar ese flujo en algo que pudiera registrarse y reconstruirse.</p>
+      <div class="hero-meta"><span>TypeScript</span><span>React</span><span>PostgreSQL</span><span>Process Analysis</span><span>Datos demo en las capturas</span></div>
+      <div class="hero-actions"><a class="btn" href="#historia">Ver el caso ↓</a></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="chapter" id="historia">
+      <div class="kicker">01 · El punto de partida</div>
+      <div>
+        <h2 class="section-title">La información existía, pero estaba repartida alrededor de las personas.</h2>
+        <div class="copy">
+          <p>El área necesitaba seguir espacios públicos, pedidos de mantenimiento, asignaciones, intervenciones y trámites administrativos. El problema era que cada parte podía vivir en un canal distinto: una planilla, un papel, un llamado o el conocimiento de quien estaba siguiendo el tema.</p>
+          <p>Eso hacía difícil responder preguntas simples: <strong>qué está pendiente, quién lo tiene, qué pasó antes y qué trabajo quedó asociado a cada espacio</strong>.</p>
+        </div>
+        <figure class="shot">
+          <img src="../assets/cases/espacios-publicos/01-dashboard.png" alt="Dashboard demo del sistema de gestión de espacios públicos">
+          <figcaption>Dashboard generado con un dataset ficticio preparado exclusivamente para el portfolio.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">02 · Modelar antes de automatizar</div>
+      <div>
+        <p class="statement">Primero había que decidir qué era un pedido, qué estados podía tener y cómo se relacionaba con el trabajo realizado.</p>
+        <div class="copy">
+          <p>Definí un modelo donde el espacio público funciona como referencia estable y los pedidos recorren estados explícitos: nuevo, asignado, en progreso y resuelto. Las intervenciones quedan vinculadas al pedido y los trámites tienen su propio historial.</p>
+          <p>La intención era que el sistema reflejara el lenguaje cotidiano del área, no obligar a la operación a traducirse a conceptos técnicos.</p>
+        </div>
+        <figure class="shot">
+          <img src="../assets/cases/espacios-publicos/03-pedidos.png" alt="Pedidos de mantenimiento demo con distintos estados">
+          <figcaption>Pedidos ficticios en distintos estados para mostrar el flujo operativo completo.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">03 · Trazabilidad</div>
+      <div>
+        <h2 class="section-title">El objetivo no era tener otra lista. Era poder reconstruir una historia.</h2>
+        <div class="split">
+          <div class="copy">
+            <p>Un pedido tiene contexto, prioridad, origen, estado y asignación. A medida que avanza, el detalle conserva la información necesaria para entender en qué punto está y qué ocurrió.</p>
+            <p>Ese criterio se repite en los trámites administrativos: cada movimiento agrega información sin borrar lo anterior.</p>
+          </div>
+          <aside class="note">
+            <div class="tiny">Criterio de diseño</div>
+            <p>Cuando el estado de una operación depende de preguntar “¿qué pasó con esto?”, el problema no es sólo de interfaz: falta una estructura de registro.</p>
+          </aside>
+        </div>
+        <figure class="shot">
+          <img src="../assets/cases/espacios-publicos/04-pedido-detalle.png" alt="Detalle demo de un pedido de mantenimiento">
+          <figcaption>Detalle de un pedido demo preparado con información ficticia.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">04 · La parte administrativa</div>
+      <div>
+        <h2 class="section-title">No todo el trabajo termina en una cuadrilla.</h2>
+        <div class="copy">
+          <p>El mismo entorno también necesitaba seguir documentación y trámites. Por eso separé ese dominio del mantenimiento diario, pero mantuve el mismo principio: estado visible, responsable e historial de movimientos.</p>
+          <p>La aplicación no intenta reemplazar un ERP municipal ni una herramienta geográfica avanzada. Su alcance es más concreto: ordenar el flujo interno que realmente necesita seguimiento cotidiano.</p>
+        </div>
+        <figure class="shot dark">
+          <img src="../assets/cases/espacios-publicos/05-tramites.png" alt="Vista demo de trámites administrativos">
+          <figcaption>Trámites administrativos ficticios dentro del mismo modelo de seguimiento.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">05 · Decisiones</div>
+      <div>
+        <h2 class="section-title">La tecnología quedó subordinada al uso.</h2>
+        <div class="decision-list">
+          <div class="decision"><div class="num">01</div><div><h3>Dominio en español</h3><p>Tablas, estados y conceptos mantienen el lenguaje del área para reducir traducciones innecesarias entre operación y código.</p></div></div>
+          <div class="decision"><div class="num">02</div><div><h3>SQL explícito</h3><p>El backend usa PostgreSQL con consultas directas y una arquitectura modular controller → service → repository.</p></div></div>
+          <div class="decision"><div class="num">03</div><div><h3>UX para personal no técnico</h3><p>Filtros visibles, formularios directos, estados completos y exportación CSV para convivir con hábitos existentes.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">06 · Mi parte</div>
+      <div>
+        <h2 class="section-title">El proyecto empezó en el proceso y terminó en un MVP full-stack.</h2>
+        <div class="copy">
+          <p>Hice el relevamiento operativo, definí el modelo de datos, el contrato de API y la arquitectura; después implementé backend y frontend e integré datos heredados.</p>
+          <p>El código se mantiene privado porque proviene de un contexto operativo real. Para esta página preparé un entorno separado y un dataset 100% ficticio; las capturas no contienen información municipal real.</p>
+          <p>El estado documentado del proyecto es <strong>MVP funcional</strong>: typecheck y build verificados, sin deploy productivo configurado y sin suite automatizada de tests en este repositorio.</p>
+        </div>
+        <div class="closing">
+          <div class="tiny">Lo que me dejó este caso</div>
+          <p>Aprendí que ordenar una operación no empieza por elegir un framework. Empieza por decidir qué vale la pena registrar y qué historia tiene que poder reconstruirse después.</p>
+          <a class="btn primary" href="../index.html#casos">Volver a los casos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">Mauro Montenegro · Operations & Data · 2026</div></footer>
+</body>
+</html>
