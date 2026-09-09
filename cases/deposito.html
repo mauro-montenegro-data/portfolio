@@ -1,9 +1,142 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Caso de portfolio: Gestión de Depósito Municipal."><title>Gestión de Depósito — Mauro Montenegro</title><link rel="stylesheet" href="../assets/case.css"></head><body><nav><div class="wrap nav"><a class="brand" href="../index.html">Mauro<span>.</span>Montenegro</a><a class="back" href="../index.html#casos">← Volver a casos</a></div></nav><header class="hero"><div class="wrap"><div class="eyebrow">Caso · Operación real · Código privado</div><h1>Gestión de Depósito Municipal</h1><p>Una aplicación construida sobre una base PostgreSQL legacy, diseñada para mejorar la operación sin reemplazar de golpe el sistema de datos existente.</p><div class="meta"><span class="pill">Node.js</span><span class="pill">TypeScript</span><span class="pill">PostgreSQL</span><span class="pill">React</span><span class="pill">Security</span></div></div></header><main class="wrap"><section class="section"><div class="label">Restricción</div><div><h2>El sistema nuevo debía convivir con una base existente.</h2><p>Productos, stock, entradas, salidas, series y cargos ya vivían en una estructura legacy. La solución debía respetar esa realidad, evitar cambios destructivos y sumar una capa moderna sin romper procesos previos.</p><div class="callout"><strong>Decisión central</strong>Adaptar la aplicación al sistema existente en lugar de forzar una migración total antes de generar valor operativo.</div></div></section><section class="section"><div class="label">Solución</div><div><h2>Capas explícitas y reglas de negocio fuera de la interfaz.</h2><pre>React + Vite + TypeScript
-        ↓ HTTP / JSON
-Express + TypeScript
-        ↓
-routes → controller → service → repository
-        ↓
-Prisma / SQL explícito
-        ↓
-PostgreSQL legacy + tablas APP_* propias</pre><p>La aplicación permite consultar y registrar operaciones, buscar por número de serie, administrar usuarios y mantener trazabilidad sobre acciones sensibles.</p></div></section><section class="section"><div class="label">Seguridad</div><div><h2>Identidad y autorización server-side.</h2><ul><li>Roles: ADMIN, RESPONSABLE, OPERADOR y CONSULTA.</li><li>Sesiones opacas almacenadas en PostgreSQL.</li><li>Cookie HttpOnly; el frontend no guarda el token de sesión.</li><li>Contraseñas derivadas con scrypt y salt aleatorio.</li><li>El backend valida permisos nuevamente en cada request protegido.</li><li>Auditoría de autenticación, usuarios y movimientos.</li></ul></div></section><section class="section"><div class="label">Operación</div><div><h2>Diseñado para un entorno local real.</h2><p>El sistema soporta uso LAN de forma opt-in, conserva localhost como comportamiento por defecto y documenta migraciones, instalación y actualización. La evolución es incremental para preservar compatibilidad y recuperación.</p><p>La release candidate actual incorpora, entre otras capacidades, remitos PDF para salidas serializadas, búsqueda exacta por número de serie, gestión de usuarios y control de movimientos.</p></div></section><section class="section"><div class="label">Mi rol</div><div><h2>Diseño funcional, técnico e implementación.</h2><p>Relevé el proceso del depósito, definí arquitectura, permisos y reglas de negocio, implementé backend y frontend, integré la aplicación con la base legacy, diseñé las migraciones propias de seguridad/auditoría y documenté instalación y evolución operativa.</p></div></section><section class="section"><div class="label">Qué demuestra</div><div><h2>Resolver restricciones es parte del trabajo técnico.</h2><ul><li>Integración con una base legacy real.</li><li>Modelado de roles según responsabilidades operativas.</li><li>Separación entre UI, reglas y acceso a datos.</li><li>Auditoría y control de cambios sensibles.</li><li>Despliegue condicionado por infraestructura local.</li><li>Evolución sin reescribir todo el sistema existente.</li></ul><div class="links"><a class="btn" href="../index.html#casos">Volver al portfolio</a></div></div></section></main><footer><div class="wrap">Mauro Montenegro · Operations & Data · 2026</div></footer></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Caso de portfolio: Gestión de Depósito.">
+  <title>Gestión de Depósito — Mauro Montenegro</title>
+  <link rel="stylesheet" href="../assets/case-ventas-v2.css">
+</head>
+<body>
+  <nav>
+    <div class="wrap nav">
+      <a class="brand" href="../index.html">Mauro<span>.</span>Montenegro</a>
+      <a class="back" href="../index.html#casos">← Volver a casos</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Caso real · Sistema legacy · Operación interna</div>
+      <h1>No podía empezar de cero. Y eso terminó definiendo casi todo.</h1>
+      <p class="lead">El depósito ya tenía una base PostgreSQL en uso. La tarea no era reemplazarla con una arquitectura “más linda”, sino sumar una aplicación útil sin romper datos, relaciones ni hábitos operativos existentes.</p>
+      <div class="hero-meta"><span>Node.js</span><span>TypeScript</span><span>PostgreSQL</span><span>React</span><span>Auditoría</span></div>
+      <div class="hero-actions"><a class="btn" href="#historia">Ver el caso ↓</a></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="chapter" id="historia">
+      <div class="kicker">01 · La restricción</div>
+      <div>
+        <h2 class="section-title">Los datos ya tenían una historia antes de que existiera esta aplicación.</h2>
+        <div class="copy">
+          <p>Productos, stock, entradas, salidas, series y cargos ya vivían en tablas legacy. Había que consultar y operar sobre esa estructura sin forzar una migración total ni asumir que podía cambiarse todo de una vez.</p>
+          <p>Elegí una evolución incremental: conservar las tablas operativas y agregar de forma separada las capacidades nuevas que la aplicación necesitaba —usuarios, sesiones, auditoría y control de movimientos.</p>
+        </div>
+        <figure class="shot">
+          <img src="../assets/cases/deposito/01-dashboard.png" alt="Dashboard demo del sistema de gestión de depósito">
+          <figcaption>Vista general con un dataset ficticio preparado exclusivamente para el portfolio.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">02 · Hacer visible el stock</div>
+      <div>
+        <p class="statement">Antes de automatizar movimientos, necesitaba que consultar el estado del depósito fuera simple.</p>
+        <div class="copy">
+          <p>La aplicación organiza productos y existencias en una interfaz pensada para uso diario. A partir de esa base fui incorporando altas, entradas, salidas y búsquedas por número de serie.</p>
+          <p>Las reglas importantes no quedan en la interfaz: el backend vuelve a validar cada operación antes de modificar datos.</p>
+        </div>
+        <figure class="shot">
+          <img src="../assets/cases/deposito/02-productos-stock.png" alt="Productos y stock ficticios en el sistema de depósito">
+          <figcaption>Productos demo con y sin stock, sin información real de inventario.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">03 · Movimientos que importan</div>
+      <div>
+        <h2 class="section-title">Una salida no es sólo restar una unidad.</h2>
+        <div class="split">
+          <div class="copy">
+            <p>Cuando hay bienes serializados, la operación necesita vincular una unidad concreta, validar su disponibilidad y dejar registrado quién hizo el movimiento. El sistema incorpora búsqueda exacta por serie y reglas específicas para este flujo.</p>
+            <p>También contempla correcciones y anulaciones con permisos diferenciados. La intención es preservar la historia, no borrar físicamente aquello que después puede necesitar explicación.</p>
+          </div>
+          <aside class="note">
+            <div class="tiny">Principio</div>
+            <p>En operaciones sensibles, “editar” no debería significar perder la versión anterior sin dejar rastro.</p>
+          </aside>
+        </div>
+        <figure class="shot dark">
+          <img src="../assets/cases/deposito/04-salida-serie.png" alt="Salida serializada demo del sistema de depósito">
+          <figcaption>Flujo de salida serializada construido con productos, agentes y números de serie ficticios.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">04 · Permisos reales</div>
+      <div>
+        <h2 class="section-title">No todas las personas deberían poder hacer lo mismo.</h2>
+        <div class="copy">
+          <p>El sistema diferencia cuatro responsabilidades: ADMIN, RESPONSABLE, OPERADOR y CONSULTA. La interfaz adapta lo que muestra, pero la autorización vuelve a comprobarse en el servidor en cada request protegido.</p>
+          <p>Las sesiones son opacas y se almacenan del lado servidor. La cookie es HttpOnly y las contraseñas se derivan con scrypt y salt aleatorio.</p>
+        </div>
+        <figure class="shot">
+          <img src="../assets/cases/deposito/05-usuarios-roles.png" alt="Usuarios y roles ficticios en el sistema de depósito">
+          <figcaption>Usuarios demo creados para representar las cuatro responsabilidades sin exponer identidades reales.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">05 · Auditoría</div>
+      <div>
+        <h2 class="section-title">Quería poder responder quién hizo qué sin depender de la memoria.</h2>
+        <div class="copy">
+          <p>La aplicación registra eventos de autenticación, gestión de usuarios y movimientos. En correcciones y anulaciones mantiene estado y versión del movimiento, y asocia los cambios al evento correspondiente.</p>
+          <p>Ese criterio de trazabilidad terminó siendo más importante que varias funcionalidades visibles: permite revisar una acción sensible después de que ocurrió.</p>
+        </div>
+        <figure class="shot">
+          <img src="../assets/cases/deposito/06-auditoria.png" alt="Auditoría demo del sistema de depósito">
+          <figcaption>Eventos de auditoría generados por operaciones ficticias realizadas a través de la API real.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">06 · Decisiones</div>
+      <div>
+        <h2 class="section-title">La modernización fue una capa, no una demolición.</h2>
+        <div class="decision-list">
+          <div class="decision"><div class="num">01</div><div><h3>Convivir con legacy</h3><p>Los repositorios traducen la estructura existente al dominio de la aplicación sin ocultar que esas tablas siguen siendo la base operativa.</p></div></div>
+          <div class="decision"><div class="num">02</div><div><h3>Permisos server-side</h3><p>La UI nunca es la fuente de verdad para autorizar una acción sensible.</p></div></div>
+          <div class="decision"><div class="num">03</div><div><h3>LAN sólo de forma deliberada</h3><p>La aplicación conserva localhost como comportamiento por defecto y requiere configuración explícita para exponerse en red.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">07 · Mi parte</div>
+      <div>
+        <h2 class="section-title">Diseñé alrededor de las restricciones que ya estaban ahí.</h2>
+        <div class="copy">
+          <p>Analicé el proceso del depósito, definí arquitectura, permisos y reglas, implementé backend y frontend, integré la aplicación con la base legacy y diseñé las migraciones propias de seguridad y auditoría.</p>
+          <p>Para documentar el caso público levanté un Postgres descartable aislado y cargué datos 100% ficticios mediante la API de la aplicación. La suite ejecutada para esta preparación quedó en <strong>2.072 tests verdes en 137 archivos</strong>, además de build backend y frontend sin errores.</p>
+          <p>El remito PDF end-to-end se verificó internamente, pero no se publica porque su plantilla contiene membrete institucional real. Las capturas de esta página no incluyen ese material.</p>
+        </div>
+        <div class="closing">
+          <div class="tiny">Lo que resume este caso</div>
+          <p>Modernizar una operación también significa saber qué no conviene reemplazar todavía y construir controles alrededor de esa decisión.</p>
+          <a class="btn primary" href="../index.html#casos">Volver a los casos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">Mauro Montenegro · Operations & Data · 2026</div></footer>
+</body>
+</html>
