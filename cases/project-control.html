@@ -43,15 +43,15 @@
     <div class="wrap">
       <div class="eyebrow">Proyecto experimental · Data modeling · Repository analysis</div>
       <h1>Project Control</h1>
-      <p class="lead">Prototipo para observar repositorios y documentación en modo read-only y construir una representación trazable del trabajo técnico. El núcleo separa evidencia literal, claims derivados, reconciliación entre fuentes, modelo de trabajo y presentación.</p>
+      <p class="lead">Prototipo read-only para analizar repositorios y documentación y producir una representación trazable del trabajo técnico. El pipeline separa observación, evidencia literal, claims derivados, reconciliación, modelo de trabajo y presentación.</p>
       <div class="hero-meta"><span>TypeScript</span><span>Git / GitHub</span><span>Evidence</span><span>Claims</span><span>Reconciliation</span><span>Data Contracts</span></div>
       <dl class="spec-grid">
-        <div class="spec"><dt>Estado</dt><dd>Experimental · hasta S18</dd></div>
+        <div class="spec"><dt>Estado</dt><dd>Experimental · en desarrollo</dd></div>
         <div class="spec"><dt>Fuentes</dt><dd>LocalSource · GitHubSource</dd></div>
         <div class="spec"><dt>Modo</dt><dd>Read-only sobre repos analizados</dd></div>
         <div class="spec"><dt>Núcleo</dt><dd>Determinístico · sin LLM requerido</dd></div>
         <div class="spec"><dt>Salida</dt><dd>ProjectAnalysis · ProjectView JSON</dd></div>
-        <div class="spec"><dt>No implementado</dt><dd>Scoring y estimates temporales productivos</dd></div>
+        <div class="spec"><dt>Pendiente</dt><dd>Estimaciones temporales · scoring · dashboard</dd></div>
       </dl>
       <div class="hero-actions"><a class="btn" href="#pipeline">Pipeline ↓</a></div>
     </div>
@@ -61,7 +61,7 @@
     <section class="chapter" id="pipeline">
       <div class="kicker">01 · Pipeline</div>
       <div>
-        <h2 class="tech-title">Cada capa reduce ambigüedad antes de producir una vista del proyecto.</h2>
+        <h2 class="tech-title">Pipeline de análisis y proyección.</h2>
         <div class="diagram">Project / Repository / Source
           ↓
       Observation
@@ -84,8 +84,8 @@
           ↓
       ProjectView</div>
         <div class="tech-copy">
-          <p>El análisis parte de una o más fuentes conocidas para un mismo repositorio. Cada observación conserva revisión, procedencia y relación con otras observaciones.</p>
-          <p>La vista final no interpreta nuevamente el proyecto: <code>ProjectView</code> proyecta resultados ya derivados por las capas anteriores y mantiene referencias hacia claims y evidencia.</p>
+          <p>El análisis puede combinar varias fuentes conocidas de un mismo repositorio. Cada observación conserva revisión, procedencia y relación con las demás.</p>
+          <p><code>ProjectView</code> no vuelve a interpretar el proyecto: proyecta resultados ya derivados y conserva referencias hacia claims y evidencia.</p>
         </div>
       </div>
     </section>
@@ -93,24 +93,24 @@
     <section class="chapter">
       <div class="kicker">02 · Evidence → Claims</div>
       <div>
-        <h2 class="tech-title">La evidencia permanece literal; la interpretación ocurre después.</h2>
+        <h2 class="tech-title">Evidence literal y Claims versionados.</h2>
         <div class="fact-table">
           <div class="fact-row"><b>Evidence</b><span>Headings, checklists, filas de tabla, bullets, párrafos de decisiones y rutas técnicas, conservando path, línea y texto literal.</span></div>
           <div class="fact-row"><b>Claims</b><span>Reglas determinísticas y versionadas convierten Evidence en predicados cerrados: <code>lifecycle</code>, <code>horizon</code>, <code>exists</code>, <code>implemented_at</code>, <code>depends_on</code> y <code>blocked_by</code>.</span></div>
           <div class="fact-row"><b>Subjects</b><span><code>SubjectRegistry</code> mantiene identidad explícita y registra matches, ambigüedades y aliases sin fusiones silenciosas.</span></div>
           <div class="fact-row"><b>Scope</b><span>Fixtures, examples, templates, vendor y generated quedan fuera del alcance documental y la exclusión se reporta explícitamente.</span></div>
         </div>
-        <div class="tech-copy"><p>Este split surgió después de una auditoría arquitectónica: una versión anterior interpretaba demasiado temprano la evidencia y terminaba creando pseudo-capacidades a partir de líneas individuales de checklist.</p></div>
+        <div class="tech-copy"><p>La separación se incorporó después de una auditoría arquitectónica que detectó interpretaciones demasiado tempranas de Evidence y pseudo-capacidades derivadas de líneas individuales de checklist.</p></div>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">03 · Reconciliación multi-source</div>
+      <div class="kicker">03 · Reconciliación</div>
       <div>
-        <h2 class="tech-title">Dos fuentes pueden divergir sin que el sistema elija un ganador arbitrario.</h2>
+        <h2 class="tech-title">Reconciliación entre fuentes por relación de revisión.</h2>
         <div class="tech-copy">
-          <p><code>packages/reconcile</code> agrupa claims equivalentes por sujeto y predicado. La supersesión temporal se deriva mediante relaciones reales de ancestría entre commits, no por fecha, orden de lectura ni tipo de fuente.</p>
-          <p>Una observación <code>dirty</code> puede aportar claims provisionales. Cuando existe divergencia o contradicción, el resultado la conserva en lugar de fabricar una conclusión única.</p>
+          <p><code>packages/reconcile</code> agrupa claims equivalentes por sujeto y predicado. La supersesión se deriva mediante relaciones de ancestría entre commits, no por fecha, orden de lectura ni tipo de fuente.</p>
+          <p>Una observación <code>dirty</code> puede aportar claims provisionales. Si existe divergencia o contradicción, el resultado la conserva sin seleccionar un valor único.</p>
         </div>
         <div class="diagram">GitHubSource ── Observation A ──┐
                                  ├─ Claims ── Reconciliation ── WorkModel
@@ -121,16 +121,16 @@ relation: same | ancestor | descendant | diverged | unknown</div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">04 · Work model</div>
+      <div class="kicker">04 · WorkModel</div>
       <div>
-        <h2 class="tech-title">El estado del proyecto se modela con entidades y ejes separados.</h2>
+        <h2 class="tech-title">Entidades, lifecycle, horizon y dependencias.</h2>
         <div class="fact-table">
           <div class="fact-row"><b>Capability</b><span>Capacidad funcional o técnica derivada de claims activos.</span></div>
-          <div class="fact-row"><b>WorkItem</b><span>Unidad concreta de trabajo con identidad estable, lifecycle, horizon y contexto estructural.</span></div>
+          <div class="fact-row"><b>WorkItem</b><span>Unidad de trabajo con identidad estable, lifecycle, horizon y contexto estructural.</span></div>
           <div class="fact-row"><b>Lifecycle</b><span><code>done | in_progress | not_started | blocked | unknown</code>.</span></div>
-          <div class="fact-row"><b>Horizon</b><span>Se modela independientemente del lifecycle para no confundir estado actual con horizonte o intención futura.</span></div>
-          <div class="fact-row"><b>Dependencies</b><span>Las referencias internas sólo se resuelven cuando hay un match exacto y no ambiguo dentro del mismo modelo.</span></div>
-          <div class="fact-row"><b>Consistency</b><span>Findings explícitos registran gaps observables entre documentación e implementación sin reescribir el lifecycle.</span></div>
+          <div class="fact-row"><b>Horizon</b><span>Eje independiente del lifecycle para separar estado actual de intención u horizonte futuro.</span></div>
+          <div class="fact-row"><b>Dependencies</b><span>Las referencias internas sólo se resuelven cuando existe un match exacto y no ambiguo dentro del mismo modelo.</span></div>
+          <div class="fact-row"><b>Consistency</b><span>Findings explícitos registran diferencias observables entre documentación e implementación sin modificar el lifecycle.</span></div>
         </div>
       </div>
     </section>
@@ -138,13 +138,13 @@ relation: same | ancestor | descendant | diverged | unknown</div>
     <section class="chapter">
       <div class="kicker">05 · Paquetes</div>
       <div>
-        <h2 class="tech-title">Las responsabilidades están separadas para mantener el núcleo recomputable.</h2>
+        <h2 class="tech-title">Separación por responsabilidad.</h2>
         <div class="package-grid">
           <div class="package"><code>source / scanner</code><p>Abstracción de LocalSource/GitHubSource y descubrimiento read-only.</p></div>
           <div class="package"><code>evidence / claims</code><p>Extracción literal e interpretación determinística mediante reglas versionadas.</p></div>
           <div class="package"><code>subjects / reconcile</code><p>Identidad de sujetos y reconciliación entre observaciones.</p></div>
           <div class="package"><code>workmodel</code><p>Capability, WorkItem, dependencias y consistency findings.</p></div>
-          <div class="package"><code>estimates / workblocks</code><p>Foundation de estimación y primera agrupación estructural por <code>groupPath</code> exacto.</p></div>
+          <div class="package"><code>estimates / workblocks</code><p>Base de estimación y primera agrupación estructural por <code>groupPath</code> exacto.</p></div>
           <div class="package"><code>presentation / project</code><p>Integración del análisis y proyección determinística hacia consumidores.</p></div>
         </div>
       </div>
@@ -153,7 +153,7 @@ relation: same | ancestor | descendant | diverged | unknown</div>
     <section class="chapter">
       <div class="kicker">06 · Salidas</div>
       <div>
-        <h2 class="tech-title">Los artefactos se escriben fuera de los repositorios observados.</h2>
+        <h2 class="tech-title">Artefactos fuera del repositorio analizado.</h2>
         <div class="diagram">.project-control-output/
   &lt;projectId&gt;/
     project.json
@@ -166,29 +166,29 @@ relation: same | ancestor | descendant | diverged | unknown</div>
         &lt;observationId&gt;.observation.json
         &lt;observationId&gt;.understanding.json
         latest.json</div>
-        <div class="tech-copy"><p><code>project-view.json</code> es la proyección destinada a consumidores de presentación o UI. La fuente analizada no se modifica y los snapshots/evidencia se mantienen fuera del repositorio objetivo.</p></div>
+        <div class="tech-copy"><p><code>project-view.json</code> es la proyección destinada a consumidores de presentación o UI. La fuente analizada no se modifica y los artefactos se escriben fuera del repositorio objetivo.</p></div>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">07 · Estado actual</div>
+      <div class="kicker">07 · Estado</div>
       <div>
-        <h2 class="tech-title">El prototipo ya tiene foundation amplia, pero evita presentar métricas que todavía no puede sostener.</h2>
+        <h2 class="tech-title">Implementado y pendiente.</h2>
         <div class="status-grid">
           <div class="status-box">
-            <h3>Implementado / foundation</h3>
+            <h3>Implementado / base</h3>
             <ul>
               <li>Observación local y GitHub.</li>
               <li>Evidence literal y Claims versionados.</li>
               <li>Reconciliación multi-source.</li>
               <li>Capability / WorkItem.</li>
               <li>Dependencias seguras y consistency findings.</li>
-              <li>EstimateSet foundation y WorkBlocks por groupPath exacto.</li>
+              <li>EstimateSet y WorkBlocks por groupPath exacto.</li>
               <li>ProjectView y export JSON.</li>
             </ul>
           </div>
           <div class="status-box">
-            <h3>Abierto</h3>
+            <h3>Pendiente</h3>
             <ul>
               <li>Heurística productiva de granularidad epic.</li>
               <li>Estimaciones temporales por work item.</li>
@@ -200,17 +200,17 @@ relation: same | ancestor | descendant | diverged | unknown</div>
             </ul>
           </div>
         </div>
-        <div class="plain-note">No se publica un porcentaje global de avance ni una estimación temporal productiva: esas capas siguen explícitamente abiertas en el roadmap.</div>
+        <div class="plain-note">El proyecto no publica un porcentaje global de avance ni estimaciones temporales productivas porque esas capas siguen abiertas en el roadmap.</div>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">08 · Trabajo realizado</div>
+      <div class="kicker">08 · Alcance</div>
       <div>
-        <h2 class="tech-title">Concepto, contratos de datos, arquitectura y evolución incremental.</h2>
+        <h2 class="tech-title">Concepto, contratos de datos y evolución arquitectónica.</h2>
         <div class="tech-copy">
-          <p>Definí el problema y los límites read-only, trabajé sobre los contratos Observation / Evidence / Claim / WorkModel y evolucioné el pipeline mediante etapas, ADRs, auditorías arquitectónicas, fixtures y tests.</p>
-          <p>Project Control sigue siendo un proyecto experimental. En el portfolio lo presento por el trabajo de modelado y diseño técnico que ya existe, no como un producto finalizado.</p>
+          <p>El trabajo incluye definición de límites read-only, contratos Observation / Evidence / Claim / WorkModel, implementación incremental del pipeline, ADRs, auditorías arquitectónicas, fixtures y tests.</p>
+          <p>Project Control continúa en desarrollo. Esta página documenta únicamente las capas ya implementadas o con base explícita en el repositorio.</p>
         </div>
         <div class="closing"><a class="btn primary" href="../index.html#casos">Volver a los proyectos</a></div>
       </div>
