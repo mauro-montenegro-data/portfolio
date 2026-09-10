@@ -3,9 +3,36 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Caso de portfolio: Sistema de Turnos — Ecografías del Sur.">
+  <meta name="description" content="Proyecto técnico: sistema de turnos y llamado para Ecografías del Sur.">
   <title>Sistema de Turnos — Mauro Montenegro</title>
   <link rel="stylesheet" href="../assets/case-ventas-v2.css">
+  <style>
+    .hero h1{max-width:1000px;font-size:clamp(2.8rem,6.5vw,5.8rem)}
+    .hero .lead{max-width:850px}
+    .spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:42px;border-top:1px solid rgba(242,239,232,.16);border-bottom:1px solid rgba(242,239,232,.16)}
+    .spec{padding:18px 22px 18px 0;border-right:1px solid rgba(242,239,232,.12)}
+    .spec:nth-child(3n){border-right:0;padding-left:22px}.spec:nth-child(3n+2){padding-left:22px}
+    .spec dt{font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.62rem;color:#aebee5;margin-bottom:5px}
+    .spec dd{margin:0;font-size:.88rem;color:rgba(242,239,232,.82)}
+    .tech-title{font-size:clamp(1.7rem,3vw,2.7rem);line-height:1.1;margin:0 0 18px;letter-spacing:-.025em}
+    .tech-copy{max-width:820px;color:#42494d;font-size:1rem}.tech-copy p{margin:0 0 16px}
+    .diagram{margin:28px 0 36px;padding:28px 30px;background:#171a1b;color:#d9e2f5;border-radius:18px;overflow:auto;font-family:"DM Mono",monospace;font-size:.82rem;line-height:1.8;white-space:pre}
+    .state-main{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:26px 0 18px}
+    .state{font-family:"DM Mono",monospace;font-size:.72rem;padding:9px 11px;border:1px solid var(--line);border-radius:7px;background:var(--paper)}
+    .arrow{color:var(--cobalt);font-weight:700}
+    .state-notes{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+    .state-note{border-top:2px solid var(--cobalt);padding:14px 0 4px}.state-note b{display:block;font-size:.9rem;margin-bottom:4px}.state-note p{margin:0;color:var(--muted);font-size:.86rem}
+    .fact-table{margin:26px 0 34px;border-top:1px solid var(--line)}
+    .fact-row{display:grid;grid-template-columns:190px 1fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line)}
+    .fact-row b{font-family:"DM Mono",monospace;font-size:.69rem;text-transform:uppercase;letter-spacing:.08em;color:var(--cobalt)}
+    .fact-row span{color:#444c50;font-size:.92rem}
+    .shots-two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}.shots-two .shot{margin:0}
+    .scope-list{display:grid;grid-template-columns:repeat(2,1fr);gap:0 28px;margin-top:24px;border-top:1px solid var(--line)}
+    .scope-item{padding:17px 0;border-bottom:1px solid var(--line);font-size:.92rem;color:#41494d}.scope-item code{font-family:"DM Mono",monospace;font-size:.75rem;color:var(--cobalt)}
+    .plain-note{margin-top:28px;padding:18px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.87rem}
+    @media(max-width:820px){.spec-grid{grid-template-columns:1fr 1fr}.spec,.spec:nth-child(3n),.spec:nth-child(3n+2){padding:16px 14px 16px 0;border-right:0}.spec:nth-child(even){padding-left:14px}.state-notes,.shots-two,.scope-list{grid-template-columns:1fr}.fact-row{grid-template-columns:1fr;gap:5px}}
+    @media(max-width:520px){.spec-grid{grid-template-columns:1fr}.spec,.spec:nth-child(even),.spec:nth-child(3n),.spec:nth-child(3n+2){padding:14px 0;border-bottom:1px solid rgba(242,239,232,.12)}.diagram{padding:20px;font-size:.72rem}}
+  </style>
 </head>
 <body>
   <nav>
@@ -17,106 +44,156 @@
 
   <header class="hero">
     <div class="wrap">
-      <div class="eyebrow">Cliente real · Sistema en operación · Local-first</div>
-      <h1>El software tenía que llegar hasta la sala de espera.</h1>
-      <p class="lead">Recepción, profesional y sala comparten el mismo estado en tiempo real, con persistencia local y sin depender de Internet para atender.</p>
-      <div class="hero-meta"><span>Node.js</span><span>Express</span><span>SQLite</span><span>WebSockets</span><span>Windows</span></div>
-      <div class="hero-actions"><a class="btn" href="#historia">Ver el flujo ↓</a></div>
+      <div class="eyebrow">Proyecto real · En operación · Sistema local</div>
+      <h1>Sistema de turnos y llamado — Ecografías del Sur</h1>
+      <p class="lead">Aplicación interna para coordinar recepción, panel profesional y sala de espera sobre un servidor local. El estado operativo se persiste en SQLite y las pantallas se sincronizan mediante WebSocket.</p>
+      <div class="hero-meta"><span>Node.js 20</span><span>Express 4</span><span>better-sqlite3</span><span>ws</span><span>HTML / CSS / JS</span><span>Windows</span></div>
+      <dl class="spec-grid">
+        <div class="spec"><dt>Estado</dt><dd>En operación</dd></div>
+        <div class="spec"><dt>Topología</dt><dd>Servidor local + 3 interfaces web</dd></div>
+        <div class="spec"><dt>Persistencia</dt><dd>SQLite · WAL</dd></div>
+        <div class="spec"><dt>Tiempo real</dt><dd>WebSocket</dd></div>
+        <div class="spec"><dt>Fuente de turnos</dt><dd>Exportación XLS / XLSX de Helios</dd></div>
+        <div class="spec"><dt>Producción</dt><dd>Windows · Node portable · servicio WinSW</dd></div>
+      </dl>
+      <div class="hero-actions"><a class="btn" href="#arquitectura">Arquitectura ↓</a></div>
     </div>
   </header>
 
   <main class="wrap">
-    <section class="chapter" id="historia">
-      <div class="kicker">01 · Momento visible</div>
+    <section class="chapter" id="arquitectura">
+      <div class="kicker">01 · Arquitectura</div>
       <div>
-        <h2 class="section-title">Para el paciente, todo el sistema se resume en un llamado claro.</h2>
-        <div class="copy">
-          <p>Cuando un profesional llama, la pantalla de sala debe reaccionar de inmediato con información visible, señal sonora y voz sintetizada.</p>
+        <h2 class="tech-title">Un backend, tres superficies de uso.</h2>
+        <div class="tech-copy">
+          <p>El servidor Express expone las interfaces de <code>/recepcion</code>, <code>/medico</code> y <code>/sala</code>. Las acciones operativas modifican el estado persistido en SQLite y los cambios relevantes se distribuyen a las pantallas mediante WebSocket.</p>
+          <p>La sala usa un payload reducido para mostrar únicamente la información necesaria para el llamado.</p>
         </div>
-        <figure class="shot">
-          <img src="../assets/cases/ecografias-turnos/01-sala-llamado.png" alt="Pantalla de sala demo mostrando un llamado de paciente ficticio">
-          <figcaption>Captura preparada con pacientes y datos completamente ficticios.</figcaption>
+        <div class="diagram">Helios XLS/XLSX
+      │
+      ▼
+  parser / preview
+      │
+      ▼
+    SQLite  ◄──── REST / lógica de cola
+      │
+      └──── WebSocket broadcast
+              ├── /recepcion
+              ├── /medico
+              └── /sala</div>
+        <figure class="shot dark">
+          <img src="../assets/cases/ecografias-turnos/06-arquitectura-local-first.png" alt="Diagrama de arquitectura local del sistema de turnos">
+          <figcaption>Flujo general del sistema. La operación diaria corre dentro de la red local.</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">02 · Tres puntos, un estado</div>
+      <div class="kicker">02 · Estado operativo</div>
       <div>
-        <p class="statement">Recepción, consultorio y sala no son tres aplicaciones distintas: son tres vistas del mismo turno.</p>
-        <div class="copy">
-          <p>Recepción administra el flujo, el profesional realiza el llamado y la sala recibe el cambio. WebSockets sincroniza las interfaces y SQLite conserva el estado local.</p>
+        <h2 class="tech-title">El turno se modela como una máquina de estados explícita.</h2>
+        <div class="state-main">
+          <span class="state">pendiente</span><span class="arrow">→</span>
+          <span class="state">presente</span><span class="arrow">→</span>
+          <span class="state">llamado</span><span class="arrow">→</span>
+          <span class="state">en_consultorio</span><span class="arrow">→</span>
+          <span class="state">atendido</span>
+        </div>
+        <div class="state-notes">
+          <div class="state-note"><b>Ausente</b><p>Cierra el turno desde los estados habilitados para esa acción.</p></div>
+          <div class="state-note"><b>Volver a cola</b><p><code>llamado → presente</code>; limpia el llamado anterior y libera el consultorio.</p></div>
+          <div class="state-note"><b>Volver a sala</b><p><code>en_consultorio → presente</code>; conserva la llegada y reinicia el ciclo de llamado.</p></div>
+          <div class="state-note"><b>Movimiento</b><p>Los turnos pendientes o presentes pueden moverse entre consultorios con validaciones de estado.</p></div>
         </div>
         <figure class="shot dark">
-          <img src="../assets/cases/ecografias-turnos/04-flujo-tres-pantallas.png" alt="Composición demo con recepción, panel profesional y sala de espera">
-          <figcaption>Las tres interfaces usando el mismo escenario ficticio.</figcaption>
+          <img src="../assets/cases/ecografias-turnos/04-flujo-tres-pantallas.png" alt="Recepción, panel profesional y sala de espera usando un escenario ficticio">
+          <figcaption>Mismo turno visto desde las tres interfaces. Datos de demostración ficticios.</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">03 · Recepción</div>
+      <div class="kicker">03 · Importación Helios</div>
       <div>
-        <h2 class="section-title">La operación necesitaba ser rápida antes que sofisticada.</h2>
-        <div class="copy">
-          <p>La interfaz permite registrar llegadas, mover pacientes entre estados y resolver excepciones como ausente o volver a cola sin exponer complejidad técnica al usuario.</p>
+        <h2 class="tech-title">El ingreso de turnos se resuelve sobre archivos exportados.</h2>
+        <div class="tech-copy">
+          <p>El importador procesa XLS/XLSX de Helios con una etapa de preview antes del commit. El parser valida columnas requeridas, convierte la fecha serial de Excel, informa errores por fila y agrupa varias filas de prácticas en un único turno.</p>
+        </div>
+        <div class="fact-table">
+          <div class="fact-row"><b>Parser</b><span>Módulo puro: recibe un buffer y devuelve grupos listos para preview/commit más errores por fila.</span></div>
+          <div class="fact-row"><b>Agrupación</b><span>Una fila por práctica puede convertirse en un turno con múltiples prácticas, preservando orden y evitando duplicados.</span></div>
+          <div class="fact-row"><b>Identidad externa</b><span>Se construye un <code>external_id</code> estable para los registros importados.</span></div>
+          <div class="fact-row"><b>Asignación</b><span>Los turnos importados entran en “Sin asignar”. Recepción define manualmente el consultorio físico.</span></div>
+          <div class="fact-row"><b>Minimización</b><span><code>raw_payload_json</code> conserva únicamente el valor crudo de <code>fecha</code>; el resto de columnas no se replica por defecto.</span></div>
         </div>
         <figure class="shot">
-          <img src="../assets/cases/ecografias-turnos/02-recepcion.png" alt="Panel de recepción demo del sistema de turnos">
-          <figcaption>Panel de recepción con turnos ficticios en distintos estados.</figcaption>
+          <img src="../assets/cases/ecografias-turnos/05-importacion-demo.png" alt="Preview ficticio del importador Helios">
+          <figcaption>Importación de demostración preparada con un archivo ficticio.</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">04 · Integración</div>
+      <div class="kicker">04 · Interfaces</div>
       <div>
-        <h2 class="section-title">No había una API que esperar. Había un archivo que ya formaba parte del trabajo.</h2>
-        <div class="copy">
-          <p>Los turnos llegan desde Helios mediante exportaciones Excel. Adapté el sistema a esa fuente con preview, validación e importación antes de llevar los registros a la operación diaria.</p>
+        <h2 class="tech-title">Cada pantalla expone acciones distintas sobre el mismo estado.</h2>
+        <div class="fact-table">
+          <div class="fact-row"><b>Recepción</b><span>Registra llegadas, asigna consultorio, administra datos operativos y mueve turnos habilitados.</span></div>
+          <div class="fact-row"><b>Profesional</b><span>Trabaja sobre la cola del consultorio: llamado, re-llamado, ingreso, retorno a sala y finalización.</span></div>
+          <div class="fact-row"><b>Sala</b><span>Recibe el llamado y presenta nombre, señal sonora y voz sintetizada con una proyección de datos reducida.</span></div>
         </div>
-        <aside class="note">
-          <div class="tiny">Decisión pragmática</div>
-          <p>Una integración útil también puede empezar respetando el formato que la operación ya produce de forma confiable.</p>
-        </aside>
-        <figure class="shot">
-          <img src="../assets/cases/ecografias-turnos/05-importacion-demo.png" alt="Modal de importación Helios con archivo ficticio de portfolio">
-          <figcaption>Preview de una importación demo generada con archivos <code>.xls</code> ficticios.</figcaption>
-        </figure>
+        <div class="shots-two">
+          <figure class="shot">
+            <img src="../assets/cases/ecografias-turnos/02-recepcion.png" alt="Panel de recepción del sistema con datos ficticios">
+            <figcaption>Recepción.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="../assets/cases/ecografias-turnos/01-sala-llamado.png" alt="Pantalla de sala mostrando un llamado ficticio">
+            <figcaption>Sala de espera.</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">05 · Arquitectura</div>
+      <div class="kicker">05 · Producción</div>
       <div>
-        <h2 class="section-title">Local-first siguió a la restricción.</h2>
-        <div class="copy">
-          <p>La atención no podía depender de Internet. Por eso el sistema corre en la red local, persiste el estado en SQLite y sincroniza recepción, profesional y sala mediante WebSockets. También documenté instalación, backup y restauración.</p>
+        <h2 class="tech-title">El despliegue también forma parte del sistema.</h2>
+        <div class="tech-copy">
+          <p>La instalación productiva es local sobre Windows y no utiliza Docker. El runtime estándar es Node.js portable. El servidor puede ejecutarse como servicio de Windows mediante WinSW, con arranque automático, reinicio ante caídas y logs locales.</p>
         </div>
-        <figure class="shot dark">
-          <img src="../assets/cases/ecografias-turnos/06-arquitectura-local-first.png" alt="Diagrama de arquitectura local-first del sistema de turnos">
-          <figcaption>Helios/Excel → importación → SQLite y lógica Express → WebSockets → recepción, profesional y sala.</figcaption>
-        </figure>
+        <div class="fact-table">
+          <div class="fact-row"><b>Servidor</b><span>Puerto 3000 dentro de la LAN; acceso por hostname o IPv4 privada.</span></div>
+          <div class="fact-row"><b>Sala</b><span>Chrome en modo kiosco abre <code>localhost:3000/sala/</code> en la PC conectada a la TV.</span></div>
+          <div class="fact-row"><b>Firewall</b><span>Regla de entrada limitada a <code>LocalSubnet</code>; el puerto no se expone a Internet.</span></div>
+          <div class="fact-row"><b>Backup</b><span>Copia consistente de SQLite y adjuntos con procedimiento documentado de restauración.</span></div>
+          <div class="fact-row"><b>Versionado</b><span>Producción se instala desde un tag estable, no desde <code>main</code>.</span></div>
+        </div>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">06 · Mi parte</div>
+      <div class="kicker">06 · Alcance</div>
       <div>
-        <h2 class="section-title">Desde el flujo de atención hasta la máquina donde corre.</h2>
-        <div class="copy">
-          <p>Relevé el flujo, diseñé estados y arquitectura, implementé backend e interfaces, adapté la importación desde Helios y preparé la instalación local con su documentación operativa.</p>
-          <p>Las capturas públicas usan fixtures ficticios y no contienen información sensible real.</p>
+        <h2 class="tech-title">Trabajo realizado en el proyecto.</h2>
+        <div class="scope-list">
+          <div class="scope-item"><code>01</code> Relevamiento del flujo de recepción, profesional y sala.</div>
+          <div class="scope-item"><code>02</code> Modelo de estados y reglas de transición.</div>
+          <div class="scope-item"><code>03</code> Backend Express, persistencia SQLite y sincronización WebSocket.</div>
+          <div class="scope-item"><code>04</code> Interfaces web para recepción, profesional y sala.</div>
+          <div class="scope-item"><code>05</code> Parser e importación de exportaciones Helios XLS/XLSX.</div>
+          <div class="scope-item"><code>06</code> Instalación Windows, servicio, backups y documentación operativa.</div>
         </div>
+        <p class="plain-note">El repositorio de operación es privado. Las capturas publicadas en este portfolio fueron generadas con datos ficticios y no exponen información de pacientes.</p>
         <div class="closing">
-          <div class="tiny">Resultado</div>
-          <p>Una herramienta que conecta tres puntos físicos de la operación y sigue funcionando dentro de la red local aunque Internet no esté disponible.</p>
+          <div class="tiny">Proyecto</div>
+          <p>Sistema interno en operación. Esta página documenta arquitectura, flujo de estados, integración y despliegue; no replica datos ni configuración sensible de la instalación.</p>
           <a class="btn primary" href="../index.html#casos">Volver a los casos</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer><div class="wrap">Mauro Montenegro · Operations & Data · 2026</div></footer>
+  <footer><div class="wrap">Mauro Montenegro · Data & Operations · 2026</div></footer>
 </body>
 </html>
