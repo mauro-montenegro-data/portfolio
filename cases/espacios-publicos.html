@@ -31,8 +31,7 @@
     .scope-list{display:grid;grid-template-columns:repeat(2,1fr);gap:0 28px;margin-top:24px;border-top:1px solid var(--line)}
     .scope-item{padding:17px 0;border-bottom:1px solid var(--line);font-size:.92rem;color:#41494d}.scope-item code{font-family:"DM Mono",monospace;font-size:.75rem;color:var(--cobalt)}
     .plain-note{margin-top:28px;padding:18px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.87rem}
-    .shots-two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}.shots-two .shot{margin:0}
-    @media(max-width:820px){.spec-grid{grid-template-columns:1fr 1fr}.spec,.spec:nth-child(3n),.spec:nth-child(3n+2){padding:16px 14px 16px 0;border-right:0}.spec:nth-child(even){padding-left:14px}.decision-grid,.scope-list,.shots-two{grid-template-columns:1fr}.fact-row{grid-template-columns:1fr;gap:5px}}
+    @media(max-width:820px){.spec-grid{grid-template-columns:1fr 1fr}.spec,.spec:nth-child(3n),.spec:nth-child(3n+2){padding:16px 14px 16px 0;border-right:0}.spec:nth-child(even){padding-left:14px}.decision-grid,.scope-list{grid-template-columns:1fr}.fact-row{grid-template-columns:1fr;gap:5px}}
     @media(max-width:520px){.spec-grid{grid-template-columns:1fr}.spec,.spec:nth-child(even),.spec:nth-child(3n),.spec:nth-child(3n+2){padding:14px 0;border-bottom:1px solid rgba(242,239,232,.12)}.diagram{padding:20px;font-size:.72rem}}
   </style>
 </head>
@@ -85,8 +84,8 @@ intervenciones_mantenimiento ◄────────────────
           <div class="fact-row"><b>Asignación</b><span>Relación histórica entre un pedido y un agente o cuadrilla, con fecha de inicio y fin.</span></div>
         </div>
         <figure class="shot">
-          <img src="../assets/cases/espacios-publicos/02-espacios-publicos.png" alt="Inventario demo de espacios públicos">
-          <figcaption>Inventario de espacios públicos generado con datos ficticios para el portfolio.</figcaption>
+          <img src="../assets/cases/espacios-publicos/01-dashboard.png" alt="Dashboard demo de Gestión de Espacios Públicos">
+          <figcaption>Vista general del MVP con datos ficticios.</figcaption>
         </figure>
       </div>
     </section>
@@ -167,9 +166,7 @@ SQL directo mediante pg</div>
         <div class="decision-grid">
           <div class="decision"><b>Sin ORM</b><p>SQL directo con <code>pg</code> para mantener explícitas las consultas y simplificar debugging en un sistema de alcance acotado.</p></div>
           <div class="decision"><b>Sin JWT</b><p>Autenticación por sesión y cookie, con control server-side de permisos para un sistema interno.</p></div>
-          <div class="decision"><b>Spanish snake_case</b><p>Tablas, columnas, catálogos y payloads usan el mismo idioma que el dominio operativo.</p></div>
           <div class="decision"><b>IDs BIGSERIAL</b><p>Identificadores internos simples para V1; UUID queda reservado para una necesidad futura de integración o exposición pública.</p></div>
-          <div class="decision"><b>Documentación primero</b><p>Product brief, MVP, decisiones, modelo de datos, contrato API y especificación de UI precedieron a la implementación ejecutable.</p></div>
           <div class="decision"><b>Ubicación tolerante</b><p>Las coordenadas son opcionales. El sistema puede operar con una referencia textual y un estado de precisión de ubicación.</p></div>
         </div>
       </div>
@@ -182,16 +179,10 @@ SQL directo mediante pg</div>
         <div class="tech-copy">
           <p>El alcance implementado incluye expedientes y trámites administrativos con pantallas de seguimiento. Estos módulos conviven con espacios, pedidos e intervenciones dentro del mismo frontend y backend modular.</p>
         </div>
-        <div class="shots-two">
-          <figure class="shot dark">
-            <img src="../assets/cases/espacios-publicos/05-tramites.png" alt="Trámites administrativos ficticios">
-            <figcaption>Trámites de demostración.</figcaption>
-          </figure>
-          <figure class="shot">
-            <img src="../assets/cases/espacios-publicos/06-vencimientos.png" alt="Vista ficticia de vencimientos administrativos">
-            <figcaption>Seguimiento de vencimientos con datos ficticios.</figcaption>
-          </figure>
-        </div>
+        <figure class="shot dark">
+          <img src="../assets/cases/espacios-publicos/05-tramites.png" alt="Trámites administrativos ficticios">
+          <figcaption>Trámites de demostración.</figcaption>
+        </figure>
       </div>
     </section>
 

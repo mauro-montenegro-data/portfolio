@@ -31,11 +31,11 @@
     section{padding:68px 0;border-bottom:1px solid var(--line)}.section-head{display:grid;grid-template-columns:180px 1fr;gap:46px;margin-bottom:34px}.kicker{color:var(--cobalt);padding-top:10px}.section-title{font-size:clamp(2.2rem,4.6vw,4.4rem);line-height:1.02;margin:0;max-width:850px}.intro{max-width:780px;color:#474f53;font-size:1.02rem}.intro p{margin:0 0 18px}.profile-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:42px}.principles{border-left:3px solid var(--cobalt);padding-left:28px}.principles .tiny{color:var(--muted);margin-bottom:12px}.principles ul{list-style:none;padding:0;margin:0}.principles li{padding:12px 0;border-bottom:1px solid var(--line);color:#42494d}.principles li:last-child{border-bottom:0}
     .cases{display:grid;gap:0}.case{display:grid;grid-template-columns:170px 1fr 180px;gap:34px;padding:40px 0;border-top:1px solid var(--line);align-items:start}.case:first-child{border-top:0}.case-number{font-family:"DM Mono",monospace;font-size:.72rem;color:var(--cobalt);letter-spacing:.12em}.case-title{font-size:clamp(2rem,3.4vw,3.3rem);line-height:1.03;margin:0 0 14px}.case p{margin:0 0 15px;color:#4a5256;max-width:720px}.case .problem{color:var(--ink);font-weight:600}.case-meta{font-family:"DM Mono",monospace;font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;line-height:1.8}.case-link{display:inline-block;margin-top:8px;color:var(--cobalt);font-weight:700;text-decoration:none}.case-link:hover{text-decoration:underline}.case.featured{padding:46px 0}.case.featured .case-title{font-size:clamp(2.4rem,4.6vw,4.5rem)}.case-note{margin-top:18px;padding:16px 0;border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
     .capabilities{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.capability{padding-top:18px;border-top:2px solid var(--cobalt)}.capability h3{margin:0 0 10px;font-size:.95rem}.capability p{margin:0;color:var(--muted);font-size:.88rem}.stackline{margin-top:36px;padding-top:22px;border-top:1px solid var(--line);font-family:"DM Mono",monospace;color:var(--muted);font-size:.73rem;line-height:2}
-    .journey{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px}.bigline{font-size:clamp(1.9rem,3.4vw,3.2rem);line-height:1.08;margin:0}.timeline{border-left:1px solid var(--line);padding-left:28px}.job{padding:0 0 24px}.job:last-child{padding-bottom:0}.job time{font-family:"DM Mono",monospace;font-size:.7rem;color:var(--muted)}.job h3{margin:5px 0 3px;font-size:1rem}.job p{margin:0;color:var(--muted);font-size:.88rem}.education{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}.education .tiny{color:var(--cobalt);margin-bottom:8px}.education h3{margin:0 0 5px;font-size:1rem}.education p{margin:0;color:var(--muted);font-size:.88rem}
+    .journey{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px}.bigline{font-size:clamp(1.9rem,3.4vw,3.2rem);line-height:1.08;margin:0}.timeline{border-left:1px solid var(--line);padding-left:28px}.job{padding:0 0 24px}.job time{font-family:"DM Mono",monospace;font-size:.7rem;color:var(--muted)}.job h3{margin:5px 0 3px;font-size:1rem}.job p{margin:0;color:var(--muted);font-size:.88rem}.education{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}.education .tiny{color:var(--cobalt);margin-bottom:8px}.education h3{margin:0 0 5px;font-size:1rem}.education p{margin:0;color:var(--muted);font-size:.88rem}.timeline .case-link{margin-top:18px}
     .contact{background:var(--graphite);color:var(--ivory);border-bottom:0}.contact .kicker{color:#aebee5}.contact .section-title{max-width:900px}.contact p{max-width:720px;color:rgba(242,239,232,.65)}.contact-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.contact-links a{padding:10px 14px;border:1px solid rgba(242,239,232,.2);border-radius:999px;text-decoration:none;font-weight:600;font-size:.85rem}
     footer{background:#131617;color:rgba(242,239,232,.4);padding:20px 0;font-size:.78rem}
     @media(max-width:850px){.links{display:none}.hero-foot{grid-template-columns:1fr 1fr}.section-head,.profile-grid,.journey{grid-template-columns:1fr;gap:20px}.case{grid-template-columns:70px 1fr}.case-meta{grid-column:2}.capabilities{grid-template-columns:1fr 1fr}}
-    @media(max-width:540px){.wrap{width:calc(100% - 28px)}.hero{padding:78px 0 58px}.hero h1{font-size:clamp(2.8rem,14vw,4.2rem)}.hero-foot,.capabilities{grid-template-columns:1fr}.case{grid-template-columns:1fr;gap:10px}.case-meta{grid-column:auto}.case-number{margin-bottom:4px}section{padding:54px 0}}
+    @media(max-width:540px){.wrap{width:calc(100% - 28px)}.hero{padding:78px 0 58px}.hero h1{font-size:clamp(2.8rem,14vw,4.2rem)}.hero-foot,.capabilities{grid-template-columns:1fr}.case{grid-template-columns:1fr;gap:10px}.case-meta{grid-column:auto}.case-number{margin-bottom:4px}section{padding:54px 0}.timeline{padding-left:18px}}
   </style>
 </head>
 <body>
@@ -118,12 +118,12 @@
           <article class="case">
             <div class="case-number">03 / SYSTEM</div>
             <div>
-              <h3 class="case-title">Sistema de Turnos — Ecografías</h3>
-              <p class="problem">Sistema local en operación para recepción, profesional y sala de espera.</p>
-              <p>Un backend Express persiste el estado en SQLite, sincroniza las interfaces por WebSocket e importa turnos desde exportaciones XLS/XLSX de Helios.</p>
+              <h3 class="case-title">Turnos, datos e integraciones — Ecografías</h3>
+              <p class="problem">Sistema local en operación para gestionar el ciclo del turno y sus flujos de datos.</p>
+              <p>Combina estado operativo en SQLite, sincronización WebSocket, ingesta XLS/XLSX de Helios, reportes y flujos asincrónicos de recordatorios y reseñas.</p>
               <a class="case-link" href="cases/ecografias-turnos.html">Ver proyecto →</a>
             </div>
-            <div class="case-meta">Node.js<br>Express<br>SQLite<br>WebSockets<br>Local-first</div>
+            <div class="case-meta">Node.js<br>Express<br>SQLite<br>WebSockets<br>Data ingestion</div>
           </article>
 
           <article class="case">
@@ -167,12 +167,11 @@
       <div class="wrap">
         <div class="section-head"><div class="kicker">04 · Trayectoria</div><h2 class="section-title">Experiencia operativa y formación técnica.</h2></div>
         <div class="journey">
-          <p class="bigline">Procesos reales como contexto para trabajar con datos y sistemas.</p>
+          <p class="bigline">La cronología completa está en el CV.</p>
           <div class="timeline">
-            <div class="job"><time>2025 → actualidad</time><h3>Jefe Administrativo · Espacios Verdes</h3><p>Gestión administrativa y operativa, procesos, documentación y herramientas internas.</p></div>
-            <div class="job"><time>2022 → 2025</time><h3>Supervisor de Depósito · Espacios Verdes</h3><p>Stock, movimientos, operación cotidiana y evolución de herramientas para el área.</p></div>
-            <div class="job"><time>Experiencia previa</time><h3>Producción · emergencias · gastronomía · administración</h3><p>Experiencia en contextos con operación diaria, personas, tiempos y restricciones distintas.</p></div>
+            <div class="job"><time>Actualidad</time><h3>Jefe Administrativo · Espacios Verdes</h3><p>Trabajo sobre procesos administrativos y operativos, documentación y herramientas internas.</p></div>
             <div class="education"><div class="tiny">Formación</div><h3>Técnico Superior en Ciencia de Datos</h3><p>Teclab Instituto Técnico Superior · 2023–2025</p></div>
+            <a class="case-link" href="cv/CV_Mauro_Montenegro.pdf">Ver CV completo →</a>
           </div>
         </div>
       </div>
