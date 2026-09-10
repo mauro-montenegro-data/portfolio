@@ -122,9 +122,9 @@ Express + TypeScript
           <div class="fact-row"><b>Stock</b><span>El backend rechaza cualquier corrección o anulación que produzca una existencia negativa.</span></div>
           <div class="fact-row"><b>Resultado incierto</b><span>El frontend no reintenta escrituras automáticamente ante red, 5xx o respuesta inválida; exige revisar el listado antes de un nuevo intento.</span></div>
         </div>
-        <figure class="shot dark">
+        <figure class="shot">
           <img src="../assets/cases/deposito/04-salida-serie.png" alt="Salida serializada demo del sistema de depósito">
-          <figcaption>Flujo de salida serializada con agentes, productos y números de serie ficticios.</figcaption>
+          <figcaption>Salida serializada con datos ficticios.</figcaption>
         </figure>
       </div>
     </section>
@@ -152,7 +152,7 @@ Express + TypeScript
     <section class="chapter">
       <div class="kicker">05 · Auditoría</div>
       <div>
-        <h2 class="tech-title">Las acciones relevantes dejan evidencia persistida.</h2>
+        <h2 class="tech-title">Las acciones relevantes quedan registradas.</h2>
         <div class="tech-copy">
           <p><code>APP_AUDITORIA</code> registra eventos de autenticación, gestión de usuarios y movimientos. Para correcciones y anulaciones conserva actor, motivo, versión anterior/nueva y snapshots del movimiento dentro de la misma transacción que modifica los datos.</p>
           <p>Las tablas <code>APP_*</code> agregan estas capacidades sin exigir un rediseño de las tablas legacy de Productos, Entradas, Salidas, Series o Cargos.</p>
