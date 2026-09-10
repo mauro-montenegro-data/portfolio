@@ -3,9 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Caso de portfolio: Gestión de Depósito.">
+  <meta name="description" content="Proyecto técnico: sistema de gestión de depósito sobre PostgreSQL legacy.">
   <title>Gestión de Depósito — Mauro Montenegro</title>
   <link rel="stylesheet" href="../assets/case-ventas-v2.css">
+  <style>
+    .hero h1{max-width:1000px;font-size:clamp(2.8rem,6.5vw,5.8rem)}
+    .hero .lead{max-width:880px}
+    .spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:42px;border-top:1px solid rgba(242,239,232,.16);border-bottom:1px solid rgba(242,239,232,.16)}
+    .spec{padding:18px 22px 18px 0;border-right:1px solid rgba(242,239,232,.12)}
+    .spec:nth-child(3n){border-right:0;padding-left:22px}.spec:nth-child(3n+2){padding-left:22px}
+    .spec dt{font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.62rem;color:#aebee5;margin-bottom:5px}
+    .spec dd{margin:0;font-size:.88rem;color:rgba(242,239,232,.82)}
+    .tech-title{font-size:clamp(1.7rem,3vw,2.7rem);line-height:1.1;margin:0 0 18px;letter-spacing:-.025em}
+    .tech-copy{max-width:830px;color:#42494d;font-size:1rem}.tech-copy p{margin:0 0 16px}
+    .diagram{margin:28px 0 36px;padding:28px 30px;background:#171a1b;color:#d9e2f5;border-radius:18px;overflow:auto;font-family:"DM Mono",monospace;font-size:.82rem;line-height:1.8;white-space:pre}
+    .fact-table{margin:26px 0 34px;border-top:1px solid var(--line)}
+    .fact-row{display:grid;grid-template-columns:205px 1fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line)}
+    .fact-row b{font-family:"DM Mono",monospace;font-size:.69rem;text-transform:uppercase;letter-spacing:.08em;color:var(--cobalt)}
+    .fact-row span{color:#444c50;font-size:.92rem}
+    .role-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0 34px}
+    .role-card{border-top:2px solid var(--cobalt);padding:14px 0 4px}.role-card b{display:block;font-family:"DM Mono",monospace;font-size:.72rem;margin-bottom:5px}.role-card p{margin:0;color:var(--muted);font-size:.86rem}
+    .scope-list{display:grid;grid-template-columns:repeat(2,1fr);gap:0 28px;margin-top:24px;border-top:1px solid var(--line)}
+    .scope-item{padding:17px 0;border-bottom:1px solid var(--line);font-size:.92rem;color:#41494d}.scope-item code{font-family:"DM Mono",monospace;font-size:.75rem;color:var(--cobalt)}
+    .plain-note{margin-top:28px;padding:18px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.87rem}
+    @media(max-width:820px){.spec-grid{grid-template-columns:1fr 1fr}.spec,.spec:nth-child(3n),.spec:nth-child(3n+2){padding:16px 14px 16px 0;border-right:0}.spec:nth-child(even){padding-left:14px}.role-grid,.scope-list{grid-template-columns:1fr 1fr}.fact-row{grid-template-columns:1fr;gap:5px}}
+    @media(max-width:520px){.spec-grid,.role-grid,.scope-list{grid-template-columns:1fr}.spec,.spec:nth-child(even),.spec:nth-child(3n),.spec:nth-child(3n+2){padding:14px 0;border-bottom:1px solid rgba(242,239,232,.12)}.diagram{padding:20px;font-size:.72rem}}
+  </style>
 </head>
 <body>
   <nav>
@@ -17,71 +40,111 @@
 
   <header class="hero">
     <div class="wrap">
-      <div class="eyebrow">Caso real · Sistema legacy · Operación interna</div>
-      <h1>No podía empezar de cero. La base operativa ya existía.</h1>
-      <p class="lead">El depósito ya trabajaba sobre PostgreSQL. La aplicación tenía que sumar control sin romper datos, relaciones ni hábitos existentes.</p>
-      <div class="hero-meta"><span>Node.js</span><span>TypeScript</span><span>PostgreSQL</span><span>React</span><span>Auditoría</span></div>
-      <div class="hero-actions"><a class="btn" href="#historia">Ver el caso ↓</a></div>
+      <div class="eyebrow">Proyecto real · Sistema interno · PostgreSQL legacy</div>
+      <h1>Gestión de Depósito</h1>
+      <p class="lead">Aplicación full-stack para operar productos, stock, entradas, salidas, series y cargos sobre una base PostgreSQL legacy existente. La capa nueva agrega autenticación, permisos, control de movimientos y auditoría sin reemplazar las tablas operativas originales.</p>
+      <div class="hero-meta"><span>Node.js</span><span>TypeScript</span><span>Express</span><span>PostgreSQL</span><span>Prisma</span><span>React / Vite</span></div>
+      <dl class="spec-grid">
+        <div class="spec"><dt>Estado</dt><dd>Release candidate 1.1.0-rc.4</dd></div>
+        <div class="spec"><dt>Backend</dt><dd>Node.js · TypeScript · Express</dd></div>
+        <div class="spec"><dt>Frontend</dt><dd>React · Vite · TypeScript</dd></div>
+        <div class="spec"><dt>Datos</dt><dd>PostgreSQL legacy + tablas APP_*</dd></div>
+        <div class="spec"><dt>Acceso</dt><dd>Sesión opaca · cookie HttpOnly · RBAC</dd></div>
+        <div class="spec"><dt>Distribución</dt><dd>Windows portable · LAN opt-in</dd></div>
+      </dl>
+      <div class="hero-actions"><a class="btn" href="#arquitectura">Arquitectura ↓</a></div>
     </div>
   </header>
 
   <main class="wrap">
-    <section class="chapter" id="historia">
-      <div class="kicker">01 · Restricción</div>
+    <section class="chapter" id="arquitectura">
+      <div class="kicker">01 · Arquitectura</div>
       <div>
-        <h2 class="section-title">Los datos ya tenían una historia antes de que existiera esta aplicación.</h2>
-        <div class="copy">
-          <p>Productos, stock, entradas, salidas, series y cargos ya vivían en tablas legacy. En lugar de reemplazarlas, construí una capa de aplicación sobre esa estructura y agregué capacidades nuevas de forma incremental.</p>
+        <h2 class="tech-title">Aplicación modular sobre un esquema que no se rediseñó desde cero.</h2>
+        <div class="tech-copy">
+          <p>El backend está organizado por dominio con capas de <code>routes</code>, <code>controller</code>, <code>service</code> y <code>repository</code>. Los repositories acceden a PostgreSQL mediante Prisma y consultas sobre las tablas legacy; la traducción entre nombres físicos y modelos de dominio ocurre dentro de esa capa.</p>
+          <p>El frontend React consume el backend por <code>/api</code>. Productos, Entradas, Salidas, Stock, Agentes, Series, Cargos y Usuarios mantienen responsabilidades separadas.</p>
         </div>
+        <div class="diagram">React / Vite
+     │
+     ▼
+   /api
+     │
+     ▼
+Express + TypeScript
+     │
+     ├── routes
+     ├── controllers
+     ├── services
+     └── repositories
+            │
+            ▼
+        PostgreSQL
+        ├── tablas legacy
+        └── APP_USUARIOS / APP_SESIONES
+            APP_AUDITORIA / APP_MOVIMIENTOS_CONTROL</div>
         <figure class="shot">
           <img src="../assets/cases/deposito/01-dashboard.png" alt="Dashboard demo del sistema de gestión de depósito">
-          <figcaption>Vista general con un dataset ficticio preparado para el portfolio.</figcaption>
+          <figcaption>Vista general generada con datos ficticios para el portfolio.</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">02 · Stock</div>
+      <div class="kicker">02 · Datos y stock</div>
       <div>
-        <p class="statement">Antes de automatizar movimientos, consultar el estado del depósito tenía que ser simple.</p>
-        <div class="copy">
-          <p>La aplicación organiza productos y existencias y permite operar altas, entradas, salidas y búsquedas por número de serie. El backend vuelve a validar cada operación antes de modificar datos.</p>
+        <h2 class="tech-title">El stock se deriva de movimientos y se valida en el backend.</h2>
+        <div class="fact-table">
+          <div class="fact-row"><b>Productos</b><span>Catálogo base de la operación. El sistema consulta detalle y registra nuevas altas con validación de identificadores.</span></div>
+          <div class="fact-row"><b>Entradas</b><span>Registran ingreso de mercadería y forman parte del cálculo de existencia.</span></div>
+          <div class="fact-row"><b>Salidas</b><span>Validan agente, producto, cantidad y stock disponible antes de persistir el movimiento.</span></div>
+          <div class="fact-row"><b>Stock</b><span>Se calcula a partir de la información operativa; no se mantiene como una tabla propia duplicada.</span></div>
+          <div class="fact-row"><b>Series y cargos</b><span>Permiten consultar bienes serializados y su relación con asignaciones y salidas.</span></div>
         </div>
         <figure class="shot">
           <img src="../assets/cases/deposito/02-productos-stock.png" alt="Productos y stock ficticios en el sistema de depósito">
-          <figcaption>Productos demo con y sin stock, sin información real de inventario.</figcaption>
+          <figcaption>Productos y existencias de demostración; no contienen inventario real.</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">03 · Movimientos</div>
+      <div class="kicker">03 · Control de movimientos</div>
       <div>
-        <h2 class="section-title">Una salida no es sólo restar una unidad.</h2>
-        <div class="copy">
-          <p>Para bienes serializados, el sistema vincula una unidad concreta, valida disponibilidad y registra el movimiento. Las correcciones y anulaciones preservan la historia en lugar de borrar físicamente lo anterior.</p>
+        <h2 class="tech-title">Correcciones y anulaciones conservan estado, versión y auditoría.</h2>
+        <div class="tech-copy">
+          <p>Entradas y Salidas pueden corregirse o anularse sin utilizar <code>DELETE</code>. <code>APP_MOVIMIENTOS_CONTROL</code> registra el estado <code>VIGENTE</code>, <code>CORREGIDO</code> o <code>ANULADO</code> y mantiene una versión por movimiento.</p>
+          <p>Las operaciones de corrección y anulación exigen un motivo y una <code>versionEsperada</code>. Si otro usuario modificó el movimiento, el backend rechaza la escritura con <code>409</code>. Los cambios que afectan stock se recalculan dentro de la transacción y usan bloqueos <code>FOR UPDATE</code> sobre los productos involucrados.</p>
         </div>
-        <aside class="note">
-          <div class="tiny">Principio</div>
-          <p>En operaciones sensibles, editar no debería significar perder la versión anterior sin dejar rastro.</p>
-        </aside>
+        <div class="fact-table">
+          <div class="fact-row"><b>Anulación</b><span>Conserva el movimiento y su historial; el estado lógico queda separado de la fila legacy.</span></div>
+          <div class="fact-row"><b>Conflictos</b><span>Control optimista por versión para evitar sobrescribir cambios que el operador no había visto.</span></div>
+          <div class="fact-row"><b>Stock</b><span>El backend rechaza cualquier corrección o anulación que produzca una existencia negativa.</span></div>
+          <div class="fact-row"><b>Resultado incierto</b><span>El frontend no reintenta escrituras automáticamente ante red, 5xx o respuesta inválida; exige revisar el listado antes de un nuevo intento.</span></div>
+        </div>
         <figure class="shot dark">
           <img src="../assets/cases/deposito/04-salida-serie.png" alt="Salida serializada demo del sistema de depósito">
-          <figcaption>Flujo de salida serializada con productos, agentes y números de serie ficticios.</figcaption>
+          <figcaption>Flujo de salida serializada con agentes, productos y números de serie ficticios.</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">04 · Permisos</div>
+      <div class="kicker">04 · Autenticación y permisos</div>
       <div>
-        <h2 class="section-title">No todas las personas deberían poder hacer lo mismo.</h2>
-        <div class="copy">
-          <p>El sistema diferencia ADMIN, RESPONSABLE, OPERADOR y CONSULTA. La interfaz adapta lo que muestra y el servidor vuelve a comprobar la autorización en cada request protegido.</p>
+        <h2 class="tech-title">Los permisos se verifican en el servidor, no en la visibilidad de la interfaz.</h2>
+        <div class="tech-copy">
+          <p>La sesión usa un token aleatorio; en PostgreSQL se guarda únicamente su hash SHA-256 y el navegador recibe una cookie <code>HttpOnly</code>. Las contraseñas se derivan con <code>scrypt</code>. Cada request protegido vuelve a resolver usuario, rol y permisos desde el backend.</p>
+        </div>
+        <div class="role-grid">
+          <div class="role-card"><b>ADMIN</b><p>Acceso completo y gestión de usuarios.</p></div>
+          <div class="role-card"><b>RESPONSABLE</b><p>Opera y puede corregir o anular movimientos.</p></div>
+          <div class="role-card"><b>OPERADOR</b><p>Consulta y registra altas operativas.</p></div>
+          <div class="role-card"><b>CONSULTA</b><p>Acceso de solo lectura.</p></div>
         </div>
         <figure class="shot">
-          <img src="../assets/cases/deposito/05-usuarios-roles.png" alt="Usuarios y roles ficticios en el sistema de depósito">
-          <figcaption>Usuarios demo para representar las cuatro responsabilidades.</figcaption>
+          <img src="../assets/cases/deposito/05-usuarios-roles.png" alt="Usuarios y roles ficticios del sistema de depósito">
+          <figcaption>Usuarios de demostración para representar la matriz de roles.</figcaption>
         </figure>
       </div>
     </section>
@@ -89,34 +152,42 @@
     <section class="chapter">
       <div class="kicker">05 · Auditoría</div>
       <div>
-        <h2 class="section-title">Quería poder responder quién hizo qué sin depender de la memoria.</h2>
-        <div class="copy">
-          <p>La aplicación registra eventos de autenticación, usuarios y movimientos, y conserva estado y versión cuando hay correcciones o anulaciones.</p>
+        <h2 class="tech-title">Las acciones relevantes dejan evidencia persistida.</h2>
+        <div class="tech-copy">
+          <p><code>APP_AUDITORIA</code> registra eventos de autenticación, gestión de usuarios y movimientos. Para correcciones y anulaciones conserva actor, motivo, versión anterior/nueva y snapshots del movimiento dentro de la misma transacción que modifica los datos.</p>
+          <p>Las tablas <code>APP_*</code> agregan estas capacidades sin exigir un rediseño de las tablas legacy de Productos, Entradas, Salidas, Series o Cargos.</p>
         </div>
         <figure class="shot">
           <img src="../assets/cases/deposito/06-auditoria.png" alt="Auditoría demo del sistema de depósito">
-          <figcaption>Eventos de auditoría generados por operaciones ficticias a través de la API real.</figcaption>
+          <figcaption>Eventos de auditoría generados por operaciones ficticias.</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">06 · Mi parte</div>
+      <div class="kicker">06 · Distribución y alcance</div>
       <div>
-        <h2 class="section-title">Diseñé alrededor de las restricciones que ya estaban ahí.</h2>
-        <div class="copy">
-          <p>Analicé el proceso, definí arquitectura, permisos y reglas, implementé backend y frontend e integré la aplicación con la base legacy.</p>
-          <p>Para documentar el caso levanté un Postgres descartable con datos 100% ficticios. La suite ejecutada quedó en <strong>2.072 tests verdes en 137 archivos</strong>, además de build backend y frontend sin errores.</p>
+        <h2 class="tech-title">La instalación está preparada para un entorno Windows interno.</h2>
+        <div class="fact-table">
+          <div class="fact-row"><b>Red</b><span>El acceso LAN es opt-in. La configuración conserva <code>127.0.0.1</code> como valor por defecto y exige habilitación explícita para exponer el servicio en la red local.</span></div>
+          <div class="fact-row"><b>Firewall</b><span>La distribución contempla limitar el acceso a la subred local y a perfiles de red privados o de dominio.</span></div>
+          <div class="fact-row"><b>Migraciones</b><span>Las capacidades nuevas se incorporan mediante migraciones idempotentes y ordenadas, manteniendo separadas las tablas propias de aplicación.</span></div>
+          <div class="fact-row"><b>Compatibilidad</b><span>Las consultas y reglas se diseñan alrededor de una base operativa legacy existente en lugar de exigir una migración total previa.</span></div>
         </div>
-        <div class="closing">
-          <div class="tiny">Resultado</div>
-          <p>Modernizar una operación también puede significar conservar lo que ya funciona y agregar controles alrededor.</p>
-          <a class="btn primary" href="../index.html#casos">Volver a los casos</a>
+        <div class="scope-list">
+          <div class="scope-item"><code>01</code> Relevamiento del proceso y estructura de datos existente.</div>
+          <div class="scope-item"><code>02</code> Backend modular y acceso a PostgreSQL legacy.</div>
+          <div class="scope-item"><code>03</code> Frontend React para consulta y operación.</div>
+          <div class="scope-item"><code>04</code> Autenticación, sesiones, roles y permisos.</div>
+          <div class="scope-item"><code>05</code> Corrección/anulación con versiones, stock y auditoría.</div>
+          <div class="scope-item"><code>06</code> Distribución portátil y configuración de acceso LAN.</div>
         </div>
+        <p class="plain-note">El repositorio operativo es privado. Las capturas publicadas en este portfolio usan datos 100% ficticios y no exponen inventario, agentes ni documentación real.</p>
+        <div class="closing"><a class="btn primary" href="../index.html#casos">Volver a los casos</a></div>
       </div>
     </section>
   </main>
 
-  <footer><div class="wrap">Mauro Montenegro · Operations & Data · 2026</div></footer>
+  <footer><div class="wrap">Mauro Montenegro · Data & Operations · 2026</div></footer>
 </body>
 </html>
