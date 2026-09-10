@@ -38,7 +38,7 @@
   <nav>
     <div class="wrap nav">
       <a class="brand" href="../index.html">Mauro Montenegro</a>
-      <a class="back" href="../index.html#casos">← Volver a casos</a>
+      <a class="back" href="../index.html#casos">← Volver a proyectos</a>
     </div>
   </nav>
 
@@ -64,7 +64,7 @@
     <section class="chapter" id="arquitectura">
       <div class="kicker">01 · Arquitectura</div>
       <div>
-        <h2 class="tech-title">Un backend, tres superficies de uso.</h2>
+        <h2 class="tech-title">Backend único para recepción, profesional y sala.</h2>
         <div class="tech-copy">
           <p>El servidor Express expone las interfaces de <code>/recepcion</code>, <code>/medico</code> y <code>/sala</code>. Las acciones operativas modifican el estado persistido en SQLite y los cambios relevantes se distribuyen a las pantallas mediante WebSocket.</p>
           <p>La sala usa un payload reducido para mostrar únicamente la información necesaria para el llamado.</p>
@@ -115,7 +115,7 @@
     <section class="chapter">
       <div class="kicker">03 · Importación Helios</div>
       <div>
-        <h2 class="tech-title">El ingreso de turnos se resuelve sobre archivos exportados.</h2>
+        <h2 class="tech-title">Importación desde exportaciones XLS/XLSX de Helios.</h2>
         <div class="tech-copy">
           <p>El importador procesa XLS/XLSX de Helios con una etapa de preview antes del commit. El parser valida columnas requeridas, convierte la fecha serial de Excel, informa errores por fila y agrupa varias filas de prácticas en un único turno.</p>
         </div>
@@ -158,7 +158,7 @@
     <section class="chapter">
       <div class="kicker">05 · Producción</div>
       <div>
-        <h2 class="tech-title">El despliegue también forma parte del sistema.</h2>
+        <h2 class="tech-title">Despliegue local en Windows y LAN.</h2>
         <div class="tech-copy">
           <p>La instalación productiva es local sobre Windows y no utiliza Docker. El runtime estándar es Node.js portable. El servidor puede ejecutarse como servicio de Windows mediante WinSW, con arranque automático, reinicio ante caídas y logs locales.</p>
         </div>
@@ -188,7 +188,7 @@
         <div class="closing">
           <div class="tiny">Proyecto</div>
           <p>Sistema interno en operación. Esta página documenta arquitectura, flujo de estados, integración y despliegue; no replica datos ni configuración sensible de la instalación.</p>
-          <a class="btn primary" href="../index.html#casos">Volver a los casos</a>
+          <a class="btn primary" href="../index.html#casos">Volver a los proyectos</a>
         </div>
       </div>
     </section>

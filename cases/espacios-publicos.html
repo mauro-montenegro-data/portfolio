@@ -133,7 +133,7 @@ intervenciones_mantenimiento ◄────────────────
     <section class="chapter">
       <div class="kicker">04 · Arquitectura</div>
       <div>
-        <h2 class="tech-title">Backend y frontend siguen la misma separación por módulos de dominio.</h2>
+        <h2 class="tech-title">Backend y frontend organizados por módulos de dominio.</h2>
         <div class="diagram">React 19 + Vite
 features/
 ├── espacios-publicos
@@ -163,7 +163,7 @@ SQL directo mediante pg</div>
     <section class="chapter">
       <div class="kicker">05 · Decisiones técnicas</div>
       <div>
-        <h2 class="tech-title">Varias decisiones se cerraron antes de implementar el primer endpoint.</h2>
+        <h2 class="tech-title">Decisiones de implementación del MVP.</h2>
         <div class="decision-grid">
           <div class="decision"><b>Sin ORM</b><p>SQL directo con <code>pg</code> para mantener explícitas las consultas y simplificar debugging en un sistema de alcance acotado.</p></div>
           <div class="decision"><b>Sin JWT</b><p>Autenticación por sesión y cookie, con control server-side de permisos para un sistema interno.</p></div>
@@ -178,7 +178,7 @@ SQL directo mediante pg</div>
     <section class="chapter">
       <div class="kicker">06 · Administración</div>
       <div>
-        <h2 class="tech-title">El mismo sistema incluye seguimiento administrativo además del flujo de mantenimiento.</h2>
+        <h2 class="tech-title">Seguimiento administrativo dentro del mismo sistema.</h2>
         <div class="tech-copy">
           <p>El alcance implementado incluye expedientes y trámites administrativos con pantallas de seguimiento. Estos módulos conviven con espacios, pedidos e intervenciones dentro del mismo frontend y backend modular.</p>
         </div>
