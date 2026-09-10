@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Proyecto técnico: sistema de turnos y llamado para Ecografías del Sur.">
-  <title>Sistema de Turnos — Mauro Montenegro</title>
+  <meta name="description" content="Proyecto técnico: sistema local de turnos, ingesta de datos e integraciones para Ecografías del Sur.">
+  <title>Sistema de Turnos e Integraciones — Mauro Montenegro</title>
   <link rel="stylesheet" href="../assets/case-ventas-v2.css">
   <style>
-    .hero h1{max-width:1000px;font-size:clamp(2.8rem,6.5vw,5.8rem)}
-    .hero .lead{max-width:850px}
+    .hero h1{max-width:1040px;font-size:clamp(2.8rem,6.2vw,5.6rem)}
+    .hero .lead{max-width:900px}
     .spec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:42px;border-top:1px solid rgba(242,239,232,.16);border-bottom:1px solid rgba(242,239,232,.16)}
     .spec{padding:18px 22px 18px 0;border-right:1px solid rgba(242,239,232,.12)}
     .spec:nth-child(3n){border-right:0;padding-left:22px}.spec:nth-child(3n+2){padding-left:22px}
     .spec dt{font-family:"DM Mono",monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.62rem;color:#aebee5;margin-bottom:5px}
     .spec dd{margin:0;font-size:.88rem;color:rgba(242,239,232,.82)}
     .tech-title{font-size:clamp(1.7rem,3vw,2.7rem);line-height:1.1;margin:0 0 18px;letter-spacing:-.025em}
-    .tech-copy{max-width:820px;color:#42494d;font-size:1rem}.tech-copy p{margin:0 0 16px}
+    .tech-copy{max-width:850px;color:#42494d;font-size:1rem}.tech-copy p{margin:0 0 16px}
     .diagram{margin:28px 0 36px;padding:28px 30px;background:#171a1b;color:#d9e2f5;border-radius:18px;overflow:auto;font-family:"DM Mono",monospace;font-size:.82rem;line-height:1.8;white-space:pre}
     .state-main{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:26px 0 18px}
     .state{font-family:"DM Mono",monospace;font-size:.72rem;padding:9px 11px;border:1px solid var(--line);border-radius:7px;background:var(--paper)}
@@ -23,7 +23,7 @@
     .state-notes{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
     .state-note{border-top:2px solid var(--cobalt);padding:14px 0 4px}.state-note b{display:block;font-size:.9rem;margin-bottom:4px}.state-note p{margin:0;color:var(--muted);font-size:.86rem}
     .fact-table{margin:26px 0 34px;border-top:1px solid var(--line)}
-    .fact-row{display:grid;grid-template-columns:190px 1fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line)}
+    .fact-row{display:grid;grid-template-columns:205px 1fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line)}
     .fact-row b{font-family:"DM Mono",monospace;font-size:.69rem;text-transform:uppercase;letter-spacing:.08em;color:var(--cobalt)}
     .fact-row span{color:#444c50;font-size:.92rem}
     .shots-two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}.shots-two .shot{margin:0}
@@ -44,17 +44,17 @@
 
   <header class="hero">
     <div class="wrap">
-      <div class="eyebrow">Proyecto real · En operación · Sistema local</div>
-      <h1>Sistema de turnos y llamado — Ecografías del Sur</h1>
-      <p class="lead">Aplicación interna para coordinar recepción, panel profesional y sala de espera sobre un servidor local. El estado operativo se persiste en SQLite y las pantallas se sincronizan mediante WebSocket.</p>
-      <div class="hero-meta"><span>Node.js 20</span><span>Express 4</span><span>better-sqlite3</span><span>ws</span><span>HTML / CSS / JS</span><span>Windows</span></div>
+      <div class="eyebrow">Proyecto real · Operación local · Datos e integraciones</div>
+      <h1>Sistema de turnos, datos e integraciones — Ecografías del Sur</h1>
+      <p class="lead">Sistema interno para operar el ciclo del turno, importar agenda desde Helios, sincronizar recepción, profesionales y sala de espera en tiempo real, y generar flujos derivados de reportes, recordatorios y solicitudes de reseña.</p>
+      <div class="hero-meta"><span>Node.js 20</span><span>Express 4</span><span>SQLite / WAL</span><span>WebSocket</span><span>XLS / XLSX</span><span>Outbox / Webhooks</span></div>
       <dl class="spec-grid">
-        <div class="spec"><dt>Estado</dt><dd>En operación</dd></div>
-        <div class="spec"><dt>Topología</dt><dd>Servidor local + 3 interfaces web</dd></div>
-        <div class="spec"><dt>Persistencia</dt><dd>SQLite · WAL</dd></div>
-        <div class="spec"><dt>Tiempo real</dt><dd>WebSocket</dd></div>
-        <div class="spec"><dt>Fuente de turnos</dt><dd>Exportación XLS / XLSX de Helios</dd></div>
-        <div class="spec"><dt>Producción</dt><dd>Windows · Node portable · servicio WinSW</dd></div>
+        <div class="spec"><dt>Estado</dt><dd>Núcleo operativo en producción</dd></div>
+        <div class="spec"><dt>Ingesta</dt><dd>Helios XLS/XLSX · preview + commit</dd></div>
+        <div class="spec"><dt>Core</dt><dd>Cola · estados · eventos · SQLite</dd></div>
+        <div class="spec"><dt>Tiempo real</dt><dd>REST + WebSocket</dd></div>
+        <div class="spec"><dt>Flujos derivados</dt><dd>Reportes · recordatorios · reseñas</dd></div>
+        <div class="spec"><dt>Producción</dt><dd>Windows · servicio local · LAN</dd></div>
       </dl>
       <div class="hero-actions"><a class="btn" href="#arquitectura">Arquitectura ↓</a></div>
     </div>
@@ -64,34 +64,43 @@
     <section class="chapter" id="arquitectura">
       <div class="kicker">01 · Arquitectura</div>
       <div>
-        <h2 class="tech-title">Backend único para recepción, profesional y sala.</h2>
+        <h2 class="tech-title">El turnero es la superficie visible de un sistema con varias capas.</h2>
         <div class="tech-copy">
-          <p>El servidor Express expone las interfaces de <code>/recepcion</code>, <code>/medico</code> y <code>/sala</code>. Las acciones operativas modifican el estado persistido en SQLite y los cambios relevantes se distribuyen a las pantallas mediante WebSocket.</p>
-          <p>La sala usa un payload reducido para mostrar únicamente la información necesaria para el llamado.</p>
+          <p>Express y WebSocket comparten un único servidor HTTP. SQLite concentra el estado operativo y sirve como punto de coordinación entre la ingesta de agenda, la lógica de cola, las interfaces, los reportes y los flujos derivados.</p>
+          <p>La operación principal es local. Las integraciones de red quedan desacopladas del ciclo básico del turno para que una falla externa no impida trabajar en recepción, consultorio o sala.</p>
         </div>
-        <div class="diagram">Helios XLS/XLSX
-      │
-      ▼
-  parser / preview
-      │
-      ▼
-    SQLite  ◄──── REST / lógica de cola
-      │
-      └──── WebSocket broadcast
-              ├── /recepcion
-              ├── /medico
-              └── /sala</div>
+        <div class="diagram">Helios
+  │ exportación XLS/XLSX
+  ▼
+Ingesta y calidad de datos
+parse · validate · normalize · group · dedupe
+  │
+  ▼
+SQLite / WAL
+  ├── turnos + estados + eventos
+  │      └── REST + WebSocket
+  │            ├── recepción
+  │            ├── profesional
+  │            └── sala
+  │
+  ├── reportes / exportaciones
+  │
+  ├── recordatorios_outbox
+  │      └── dispatcher ──► webhook externo
+  │
+  └── solicitudes_resena
+         └── dispatcher ──► integración externa</div>
         <figure class="shot dark">
           <img src="../assets/cases/ecografias-turnos/06-arquitectura-local-first.png" alt="Diagrama de arquitectura local del sistema de turnos">
-          <figcaption>Flujo general del sistema. La operación diaria corre dentro de la red local.</figcaption>
+          <figcaption>Arquitectura base del sistema local. El repositorio evolucionó además con capas de ingesta, reportes y despacho asincrónico.</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">02 · Estado operativo</div>
+      <div class="kicker">02 · Operación</div>
       <div>
-        <h2 class="tech-title">El turno se modela como una máquina de estados explícita.</h2>
+        <h2 class="tech-title">La cola se apoya en una máquina de estados explícita.</h2>
         <div class="state-main">
           <span class="state">pendiente</span><span class="arrow">→</span>
           <span class="state">presente</span><span class="arrow">→</span>
@@ -103,7 +112,10 @@
           <div class="state-note"><b>Ausente</b><p>Cierra el turno desde los estados habilitados para esa acción.</p></div>
           <div class="state-note"><b>Volver a cola</b><p><code>llamado → presente</code>; limpia el llamado anterior y libera el consultorio.</p></div>
           <div class="state-note"><b>Volver a sala</b><p><code>en_consultorio → presente</code>; conserva la llegada y reinicia el ciclo de llamado.</p></div>
-          <div class="state-note"><b>Movimiento</b><p>Los turnos pendientes o presentes pueden moverse entre consultorios con validaciones de estado.</p></div>
+          <div class="state-note"><b>Movimiento</b><p>Los turnos pendientes o presentes pueden cambiar de consultorio con validaciones de estado.</p></div>
+        </div>
+        <div class="tech-copy">
+          <p>Cuando una pantalla se conecta o reconecta, el backend reconstruye un snapshot consistente de consultorios, turno actual y cola. Las lecturas se agrupan dentro de una transacción para evitar estados intermedios mientras ocurre una mutación.</p>
         </div>
         <figure class="shot dark">
           <img src="../assets/cases/ecografias-turnos/04-flujo-tres-pantallas.png" alt="Recepción, panel profesional y sala de espera usando un escenario ficticio">
@@ -113,34 +125,86 @@
     </section>
 
     <section class="chapter">
-      <div class="kicker">03 · Importación Helios</div>
+      <div class="kicker">03 · Ingesta de datos</div>
       <div>
-        <h2 class="tech-title">Importación desde exportaciones XLS/XLSX de Helios.</h2>
+        <h2 class="tech-title">Pipeline local sobre exportaciones XLS/XLSX de Helios.</h2>
         <div class="tech-copy">
-          <p>El importador procesa XLS/XLSX de Helios con una etapa de preview antes del commit. El parser valida columnas requeridas, convierte la fecha serial de Excel, informa errores por fila y agrupa varias filas de prácticas en un único turno.</p>
+          <p>La extracción desde Helios es manual: el sistema recibe el archivo exportado y automatiza la transformación y carga. El parser trabaja en memoria, valida estructura, normaliza filas y genera un preview antes de escribir en la base.</p>
         </div>
+        <div class="diagram">Helios
+  │ exportación manual
+  ▼
+XLS / XLSX
+  │
+  ├─ validar columnas requeridas
+  ├─ convertir fecha serial de Excel
+  ├─ normalizar valores
+  ├─ reportar errores por fila
+  ├─ agrupar prácticas del mismo turno
+  ├─ construir external_id estable
+  ├─ clasificar nuevos / duplicados
+  └─ analizar calidad de teléfono
+        │
+        ▼
+      preview
+        │ confirmación
+        ▼
+      SQLite</div>
         <div class="fact-table">
           <div class="fact-row"><b>Parser</b><span>Módulo puro: recibe un buffer y devuelve grupos listos para preview/commit más errores por fila.</span></div>
-          <div class="fact-row"><b>Agrupación</b><span>Una fila por práctica puede convertirse en un turno con múltiples prácticas, preservando orden y evitando duplicados.</span></div>
-          <div class="fact-row"><b>Identidad externa</b><span>Se construye un <code>external_id</code> estable para los registros importados.</span></div>
-          <div class="fact-row"><b>Asignación</b><span>Los turnos importados entran en “Sin asignar”. Recepción define manualmente el consultorio físico.</span></div>
-          <div class="fact-row"><b>Minimización</b><span><code>raw_payload_json</code> conserva únicamente el valor crudo de <code>fecha</code>; el resto de columnas no se replica por defecto.</span></div>
+          <div class="fact-row"><b>Agrupación</b><span>Varias filas de prácticas pueden convertirse en un único turno, preservando el conjunto de prácticas sin duplicarlas.</span></div>
+          <div class="fact-row"><b>Idempotencia de carga</b><span>Un <code>external_id</code> estable permite detectar turnos ya importados antes del commit.</span></div>
+          <div class="fact-row"><b>Calidad telefónica</b><span>El preview clasifica el dato de contacto y permite separar registros utilizables de los que requieren revisión.</span></div>
+          <div class="fact-row"><b>Minimización</b><span><code>raw_payload_json</code> conserva únicamente el valor crudo de <code>fecha</code>; otras columnas no se duplican por defecto.</span></div>
         </div>
         <figure class="shot">
           <img src="../assets/cases/ecografias-turnos/05-importacion-demo.png" alt="Preview ficticio del importador Helios">
-          <figcaption>Importación de demostración preparada con un archivo ficticio.</figcaption>
+          <figcaption>Preview de importación con un archivo ficticio.</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">04 · Interfaces</div>
+      <div class="kicker">04 · Automatización e integraciones</div>
       <div>
-        <h2 class="tech-title">Cada pantalla expone acciones distintas sobre el mismo estado.</h2>
+        <h2 class="tech-title">Los envíos externos se modelan como trabajo asincrónico persistente.</h2>
+        <div class="tech-copy">
+          <p>Recordatorios y reseñas no se ejecutan como una llamada de red dentro de la transición principal del turno. El sistema primero persiste la intención local y un dispatcher procesa después los pendientes.</p>
+          <p>Esto mantiene separada la operación clínica del estado de una integración externa y permite reintentos controlados sin convertir una caída de red en un bloqueo del turnero.</p>
+        </div>
+        <div class="fact-table">
+          <div class="fact-row"><b>Recordatorios</b><span>Una outbox derivada conserva identidad estable, payload serializado, hash, estado, intentos y último error.</span></div>
+          <div class="fact-row"><b>Dispatcher</b><span>Procesa una cantidad acotada por ciclo, aplica timeout y backoff progresivo, y envía por HTTP con secreto e idempotency key.</span></div>
+          <div class="fact-row"><b>ACK</b><span>Un envío sólo se marca como confirmado cuando la respuesta es válida y corresponde al mismo identificador del turno.</span></div>
+          <div class="fact-row"><b>Reseñas</b><span>Usan una máquina de estados separada: <code>pendiente → en_progreso → enviada / error / cancelada</code>, ligada a una selección explícita de recepción.</span></div>
+          <div class="fact-row"><b>Fail-open</b><span>La reconciliación de la outbox es derivada: un fallo interno en esa capa no impide la operación principal del turno.</span></div>
+        </div>
+        <p class="plain-note">Estas capas están implementadas en el repositorio y continúan evolucionando junto con los workflows externos. El núcleo local de turnos se mantiene independiente de esa integración.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">05 · Proyecciones y reportes</div>
+      <div>
+        <h2 class="tech-title">Cada consumidor recibe una proyección distinta de los mismos datos.</h2>
+        <div class="fact-table">
+          <div class="fact-row"><b>Sala</b><span>Snapshot mínimo para la TV: sólo los campos necesarios para identificar el llamado y la cola visible.</span></div>
+          <div class="fact-row"><b>Recepción</b><span>Accede al contexto operativo necesario para asignar consultorio, corregir datos y trabajar la cola.</span></div>
+          <div class="fact-row"><b>Datos por completar</b><span>Existe una proyección específica para detectar teléfonos ausentes, inválidos o que requieren revisión sin exponer el registro completo.</span></div>
+          <div class="fact-row"><b>Reportes</b><span>Endpoints diarios y por período devuelven información operativa agregada sin datos personales de pacientes.</span></div>
+          <div class="fact-row"><b>Exportación</b><span>Una salida JSON/CSV dedicada prepara los campos necesarios para flujos de contacto y automatización.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="kicker">06 · Interfaces</div>
+      <div>
+        <h2 class="tech-title">Tres superficies operativas sobre el mismo estado persistido.</h2>
         <div class="fact-table">
           <div class="fact-row"><b>Recepción</b><span>Registra llegadas, asigna consultorio, administra datos operativos y mueve turnos habilitados.</span></div>
           <div class="fact-row"><b>Profesional</b><span>Trabaja sobre la cola del consultorio: llamado, re-llamado, ingreso, retorno a sala y finalización.</span></div>
-          <div class="fact-row"><b>Sala</b><span>Recibe el llamado y presenta nombre, señal sonora y voz sintetizada con una proyección de datos reducida.</span></div>
+          <div class="fact-row"><b>Sala</b><span>Recibe el llamado por WebSocket y presenta nombre, señal sonora y voz sintetizada con una proyección reducida.</span></div>
         </div>
         <div class="shots-two">
           <figure class="shot">
@@ -156,38 +220,41 @@
     </section>
 
     <section class="chapter">
-      <div class="kicker">05 · Producción</div>
+      <div class="kicker">07 · Producción y resiliencia</div>
       <div>
-        <h2 class="tech-title">Despliegue local en Windows y LAN.</h2>
+        <h2 class="tech-title">Despliegue local en Windows, con dependencias externas fuera del camino crítico.</h2>
         <div class="tech-copy">
-          <p>La instalación productiva es local sobre Windows y no utiliza Docker. El runtime estándar es Node.js portable. El servidor puede ejecutarse como servicio de Windows mediante WinSW, con arranque automático, reinicio ante caídas y logs locales.</p>
+          <p>La instalación productiva corre sobre Windows con Node.js portable. Express y WebSocket comparten el mismo servidor y el puerto es configurable por entorno; <code>3000</code> es sólo el valor por defecto.</p>
         </div>
         <div class="fact-table">
-          <div class="fact-row"><b>Servidor</b><span>Puerto 3000 dentro de la LAN; acceso por hostname o IPv4 privada.</span></div>
-          <div class="fact-row"><b>Sala</b><span>Chrome en modo kiosco abre <code>localhost:3000/sala/</code> en la PC conectada a la TV.</span></div>
-          <div class="fact-row"><b>Firewall</b><span>Regla de entrada limitada a <code>LocalSubnet</code>; el puerto no se expone a Internet.</span></div>
+          <div class="fact-row"><b>Acceso LAN</b><span>Recepción y otras PCs pueden entrar por hostname o IPv4 privada; la sala usa <code>localhost</code> en la PC conectada a la TV.</span></div>
+          <div class="fact-row"><b>HTTP + WebSocket</b><span>Ambos protocolos comparten el mismo servidor y la misma política de origen, sin abrir un segundo puerto.</span></div>
+          <div class="fact-row"><b>Conexiones</b><span>Heartbeat periódico detecta sockets WebSocket que quedaron zombies después de suspensión o pérdida de red.</span></div>
+          <div class="fact-row"><b>Healthcheck</b><span><code>/api/health</code> permite comprobar que el proceso está respondiendo.</span></div>
+          <div class="fact-row"><b>Shutdown</b><span>El cierre detiene dispatchers, termina sockets, cierra HTTP y por último la base SQLite.</span></div>
           <div class="fact-row"><b>Backup</b><span>Copia consistente de SQLite y adjuntos con procedimiento documentado de restauración.</span></div>
-          <div class="fact-row"><b>Versionado</b><span>Producción se instala desde un tag estable, no desde <code>main</code>.</span></div>
         </div>
       </div>
     </section>
 
     <section class="chapter">
-      <div class="kicker">06 · Alcance</div>
+      <div class="kicker">08 · Alcance</div>
       <div>
-        <h2 class="tech-title">Trabajo realizado en el proyecto.</h2>
+        <h2 class="tech-title">Capas trabajadas dentro del mismo proyecto.</h2>
         <div class="scope-list">
-          <div class="scope-item"><code>01</code> Relevamiento del flujo de recepción, profesional y sala.</div>
-          <div class="scope-item"><code>02</code> Modelo de estados y reglas de transición.</div>
-          <div class="scope-item"><code>03</code> Backend Express, persistencia SQLite y sincronización WebSocket.</div>
-          <div class="scope-item"><code>04</code> Interfaces web para recepción, profesional y sala.</div>
-          <div class="scope-item"><code>05</code> Parser e importación de exportaciones Helios XLS/XLSX.</div>
-          <div class="scope-item"><code>06</code> Instalación Windows, servicio, backups y documentación operativa.</div>
+          <div class="scope-item"><code>01</code> Modelo operativo de turnos, colas y transiciones de estado.</div>
+          <div class="scope-item"><code>02</code> Backend Express, persistencia SQLite, eventos y sincronización WebSocket.</div>
+          <div class="scope-item"><code>03</code> Interfaces de recepción, profesional y sala.</div>
+          <div class="scope-item"><code>04</code> Pipeline de ingesta y transformación desde Helios XLS/XLSX.</div>
+          <div class="scope-item"><code>05</code> Calidad de teléfonos, proyecciones mínimas y criterios de minimización de datos.</div>
+          <div class="scope-item"><code>06</code> Reportes operativos y exportaciones específicas.</div>
+          <div class="scope-item"><code>07</code> Outbox, dispatchers, idempotencia, reintentos y contratos para integraciones externas.</div>
+          <div class="scope-item"><code>08</code> Instalación Windows, LAN, healthcheck, backups y documentación operativa.</div>
         </div>
         <p class="plain-note">El repositorio de operación es privado. Las capturas publicadas en este portfolio fueron generadas con datos ficticios y no exponen información de pacientes.</p>
         <div class="closing">
-          <div class="tiny">Proyecto</div>
-          <p>Sistema interno en operación. Esta página documenta arquitectura, flujo de estados, integración y despliegue; no replica datos ni configuración sensible de la instalación.</p>
+          <div class="tiny">Estado del proyecto</div>
+          <p>El núcleo local de turnos está en operación. Las capas de automatización e integración externa se documentan según el estado implementado en el repositorio y continúan evolucionando por separado del flujo crítico local.</p>
           <a class="btn primary" href="../index.html#casos">Volver a los proyectos</a>
         </div>
       </div>
