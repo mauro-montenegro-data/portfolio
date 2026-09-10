@@ -127,7 +127,7 @@ registro final</div>
           <div class="severity"><b>AUTO_CORRECTED</b><p>Corrección determinística y segura, registrando el valor recibido y el normalizado.</p></div>
         </div>
         <div class="tech-copy">
-          <p>La severidad no se decide sólo por formato. Por ejemplo, un CUIT inválido se conserva como advertencia porque la clave operativa es <code>cliente_id</code>; una factura vencida marcada como pendiente también se advierte en lugar de cambiar su estado automáticamente, porque eso implicaría una inferencia de negocio.</p>
+          <p>No toda inconsistencia invalida una fila ni debe corregirse automáticamente. La severidad define si el dato se rechaza, se conserva con advertencia o se normaliza de forma segura.</p>
         </div>
         <figure class="shot">
           <img src="../assets/cases/ventas-cobranzas/03-rejected-rows.png" alt="Filas rechazadas y motivos dentro de la demo">
@@ -147,7 +147,7 @@ registro final</div>
           <div class="fact-row"><b>Fechas</b><span>Formatos reconocibles se convierten a ISO.</span></div>
           <div class="fact-row"><b>Total de venta</b><span>Si cantidad, precio y descuento son confiables, el total derivado puede recalcularse y el cambio queda auditado.</span></div>
         </div>
-        <div class="tech-copy"><p>La arquitectura unifica la etapa de normalización con las autocorrecciones seguras: no existe una segunda fase que modifique datos después de validar sin dejar evidencia.</p></div>
+        <div class="tech-copy"><p>La normalización y las autocorrecciones seguras forman una sola etapa y cada cambio queda registrado.</p></div>
       </div>
     </section>
 
@@ -174,7 +174,7 @@ registro final</div>
     <section class="chapter">
       <div class="kicker">06 · Corrida demo</div>
       <div>
-        <h2 class="tech-title">El dataset sintético inyecta errores mediante reglas explícitas.</h2>
+        <h2 class="tech-title">Resultados de la corrida sintética.</h2>
         <div class="metrics">
           <div class="metric"><b>1.974</b><span>filas recibidas</span></div>
           <div class="metric"><b>1.868</b><span>procesadas</span></div>
@@ -182,8 +182,7 @@ registro final</div>
           <div class="metric"><b>1.622</b><span>hallazgos registrados</span></div>
         </div>
         <div class="tech-copy">
-          <p>La corrida documentada registra 1.363 autocorrecciones y 149 advertencias, sin errores bloqueantes. Un hallazgo no equivale necesariamente a una fila: un mismo registro puede acumular más de una observación.</p>
-          <p>El generador usa semilla fija y reglas de inyección por índice de fila. La evidencia definitiva de cada corrida es la salida real del pipeline, no el número teórico de errores inyectados.</p>
+          <p>La corrida registra 1.363 autocorrecciones y 149 advertencias. Una fila puede registrar más de un hallazgo.</p>
         </div>
       </div>
     </section>
